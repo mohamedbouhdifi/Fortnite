@@ -5,15 +5,17 @@
   <title>Fortnite Outfit Skins</title>
   <style>
     .skin-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 0 auto;
-      max-width: 800px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-column-gap: 30px;
+      grid-row-gap: 25px;
+      padding: 100px;
+      padding-top: 100px;
+      border-radius: 10px;
     }
 
     .skin-card {
-      width: calc(25% - 10px);
+      width: 100%;
       margin-bottom: 20px;
     }
 
@@ -49,14 +51,16 @@
     }
 
     .popup-content img {
-      width: 200px;
+      width: 70%;
       height: auto;
     }
   </style>
 </head>
 
 <body>
-  <div class="skin-container"></div>
+  <div class="skin-container">
+
+  </div>
   <script src="script.js"></script>
 </body>
 
