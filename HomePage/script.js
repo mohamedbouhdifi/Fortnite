@@ -1,3 +1,9 @@
+let subMenu =  document.getElementById("subMenu");
+
+function toggleMenu(){
+  subMenu.classList.toggle("open-menu");
+}
+
 const apiUrl = 'https://fortnite-api.com/v2/cosmetics/br';
 
 async function getFortniteSkins() {
