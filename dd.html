@@ -1,70 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Popup Example</title>
+	<title>Delete Icon with Confirmation Popup</title>
 	<style>
+		.delete-icon {
+			cursor: pointer;
+		}
 		.popup {
 			display: none;
 			position: fixed;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			background-color: white;
+			background-color: #fff;
 			padding: 20px;
-			border: 1px solid black;
-			box-shadow: 5px 5px 5px black;
-			z-index: 999;
+			border: 1px solid #ccc;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+			z-index: 9999;
 		}
-
-		.popup img {
-			float: left;
-			margin-right: 20px;
-			max-width: 50%;
-			max-height: 50%;
-		}
-
 		.popup h2 {
 			margin-top: 0;
+			margin-bottom: 10px;
 		}
-
-		.center {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-		}
-
-		.button {
-			padding: 10px 20px;
+		.popup button {
 			background-color: #4CAF50;
 			color: white;
 			border: none;
-			border-radius: 5px;
+			padding: 10px 20px;
 			font-size: 16px;
 			cursor: pointer;
+			border-radius: 5px;
+			margin-top: 10px;
+		}
+		.popup button:hover {
+			background-color: #3e8e41;
 		}
 	</style>
 </head>
 <body>
-	<div class="center">
-		<button class="button" onclick="showPopup()">Click Me!</button>
-		<div class="popup" id="popup">
-			<img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-			<div>
-				<h2>Title</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra elit id sapien blandit lobortis. Mauris consequat ac odio vel facilisis. Vestibulum porta euismod nunc, a maximus metus malesuada sed. </p>
-			</div>
-			<button onclick="hidePopup()">Close</button>
-		</div>
+	<p>Click the delete icon to display the confirmation popup:</p>
+	<span class="delete-icon" onclick="showConfirmationPopup()">&#10060;</span>
+
+	<div class="popup" id="confirmation-popup">
+		<h2>Are you sure you want to delete?</h2>
+		<button onclick="deleteItem()">Yes</button>
+		<button onclick="hideConfirmationPopup()">No</button>
 	</div>
 
 	<script>
-		function showPopup() {
-			document.getElementById("popup").style.display = "block";
+		function showConfirmationPopup() {
+			document.getElementById("confirmation-popup").style.display = "block";
 		}
 
-		function hidePopup() {
-			document.getElementById("popup").style.display = "none";
+		function hideConfirmationPopup() {
+			document.getElementById("confirmation-popup").style.display = "none";
+		}
+
+		function deleteItem() {
+			// Perform delete operation here
+			console.log("Item deleted.");
+			hideConfirmationPopup();
 		}
 	</script>
 </body>

@@ -253,6 +253,9 @@ header {
   text-align: center;
 }
 
+.comments{
+  float: left;
+}
 
 .btn-close {
   margin-left: 980px;

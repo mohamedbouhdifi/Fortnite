@@ -89,15 +89,25 @@ container.addEventListener('click', event => {
           </div><br>
           <div class= "pickaxe">
               <span id="pickaxetext">Pickaxe</span><br> 
-              <a href="" id="pickaxe"><img src="/FavouritePage/images/pickaxe.png" alt="pickaxe" style="width: 200px;
+              <a href="#" id="pickaxe"><img src="/FavouritePage/images/pickaxe.png" alt="pickaxe" style="width: 200px;
               height: 200px;"></a> 
             </div>
             
           <div class= "emote">
               <span id= "emote">Emote</span><br>
-              <a href=""><img src="/FavouritePage/images/emote.png" alt="pickaxe" style="width: 200px;
+              <a href="#"><img src="/FavouritePage/images/emote.png" alt="pickaxe" style="width: 200px;
               height: 200px;"></a>      
           </div>
+          <br><br>
+          <form action="/html/tags/html_form_tag_action.cfm" method="post" class= "comments">
+          <div>
+            <h2>Comments:</h2>
+            <textarea name="comments" id="comments" style="font-family:sans-serif;font-size:1.2em;">
+          </textarea>
+          </div>
+          <input type="submit" value="Save" class= "buttonC">
+        </form>          
+
         </div>
       `;
     document.body.appendChild(popup);
