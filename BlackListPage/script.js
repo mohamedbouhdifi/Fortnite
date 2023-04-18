@@ -2,6 +2,17 @@ let subMenu = document.getElementById("subMenu");
 const apiUrl = 'https://fortnite-api.com/v2/cosmetics/br';
 const container = document.querySelector('.skin-container');
 
+const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+
+    toggleBtn.onclick = function () {
+      dropDownMenu.classList.toggle('open')
+      const isOpen = dropDownMenu.classList.contains('open')
+
+      toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
+
+    }
 
 function toggleMenu() {
   subMenu.classList.toggle("open-menu");

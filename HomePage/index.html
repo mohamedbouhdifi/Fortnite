@@ -18,11 +18,37 @@
     <div class="navbar">
       <h2 class="logo">Project Arc</h2>
       <ul class="links">
-        <li><a href="/LandingPage/index.html">Home</a></li>
+        <li><a href="/LandingPage/index.html" id="Homepage">Home</a></li>
         <li><a href="/HomePage/index.html">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/FavouritePage/FavouritePage.html">Favourite Skins</a></li>
+        <li><a href="/BlackListPage/BlacklistPage.html">Blacklisted Skins</a></li>
       </ul>
+      <img src="/HomePage/images/profile.jpg" class="user-pic" onclick="toggleMenu()">
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div class="user-info">
+              <img src="/HomePage/images/profile.jpg" alt="">
+              <h3>User</h3>
+          </div>
+          
+          <hr>
+            <a href="/EditProfile/Profile.html" class="sub-menu-link">
+              <i class="fa fa-edit" style="font-size:24px"></i>
+              <p>Edit Profile</p>
+              <span></span>
+            </a>
+            <a href="/Settings/PrivacyPolicy.html" class="sub-menu-link">
+              <i class="fa fa-gear" style="font-size:24px;"></i>
+              <p>Privacy Policy</p>
+              <span></span>
+            </a>
+            <a href="/LogInPage/LogInPage.html" class="sub-menu-link">
+              <i class="fa fa-sign-out" style="font-size:24px"></i>
+              <p>Logout</p>
+              <span></span>
+            </a>
+        </div>
+      </div>
       <a href="/LogInPage/LogInPage.html" class="action_btn">get started!</a>
       <div class="toggle_btn">
         <i class="fa-solid fa-bars"></i>
@@ -30,10 +56,10 @@
     </div>
 
     <div class="dropdown_menu">
-      <li><a href="/LandingPage/index.html">Home</a></li>
-      <li><a href="/HomePage/index.html">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="/LandingPage/index.html" id="Homepage">Home</a></li>
+        <li><a href="/HomePage/index.html">About</a></li>
+        <li><a href="/FavouritePage/FavouritePage.html">Favourite Skins</a></li>
+        <li><a href="/BlackListPage/BlacklistPage.html">Blacklisted Skins</a></li>
       <li><a href="LogInPage.html" class="action_btn">get started!</a></li>
     </div>
   </header>

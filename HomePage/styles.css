@@ -116,6 +116,7 @@ header {
   justify-content: center;
 }
 
+
 /* RESPONSIVE DESIGN */
 @media(max-width:992px) {
 
@@ -272,6 +273,10 @@ header {
 
 .sub-menu-link:hover p {
   font-weight: 600;
+}
+
+#Homepage{
+  font-weight: bold;
 }
 
 .skin-container {
