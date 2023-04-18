@@ -11,7 +11,9 @@
 body {
   
   height: 100vh;
-  background-color: #2f3136;
+  background: url("/LogInPage/images/Fortnite.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
 
 }
 
