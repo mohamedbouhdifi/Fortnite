@@ -68,14 +68,14 @@ container.addEventListener('click', event => {
     popup.innerHTML = `
         <div class="popup-content">
 
-        <span class="delete-icon" onclick="showConfirmationPopup()"><i class="fa fa-trash-o" style="font-size:48px;color:red"></i></span>
+        <span class="delete-icon" onclick="showConfirmationPopup()"><i class="fa fa-trash-o" style="color:red"></i></span>
     
         <div class="popupDelete" id="confirmation-popup">
             <h2>Are you sure you want to delete?</h2>
             <button onclick="deleteItem()">Yes</button>
             <button onclick="hideConfirmationPopup()">No</button>
         </div>
-          <button class="btn-close">&times;</button>
+          <span class="btn-close"><i class="fa fa-close"></i></span>
           
           <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
           <h1>${skinCard.querySelector('img').dataset.name}</h1>

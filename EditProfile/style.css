@@ -10,7 +10,7 @@ body {
     width: 300px;
     border-radius: 50%;
     cursor: pointer;
-    margin-left: 30px;
+    padding-bottom: 20px;
   }
   
   /* Style the page title */
@@ -63,6 +63,7 @@ body {
   form {
     max-width: 600px;
     margin: 0 auto;
+    text-align: center;
   }
   
   /* Style the section headers */
