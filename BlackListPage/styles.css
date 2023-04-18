@@ -11,8 +11,6 @@
   body { 
     height: 100vh;
     background-color: #2f3136;
-    overflow-x: hidden;
-    overflow-y: hidden;
   }
   
   li {
@@ -30,9 +28,10 @@
   }
   
   header {
-  
+    
     position: relative;
     padding: 0 2rem;
+    padding-top: 20px;
   }
   
   .navbar {
@@ -43,6 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 20px;
   }
   
   .navbar .logo .a {
@@ -62,26 +62,8 @@
     display: none;
   }
   
-  .action_btn {
-    background-color: orange;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    font-size: 0.8rem;
+  #BlacklistPage{
     font-weight: bold;
-    cursor: pointer;
-    transition: scale 0.2 ease;
-  }
-  
-  .action_btn:hover {
-    scale: 1.05;
-    color: #fff;
-  }
-  
-  .action_btn:active {
-    scale: 0.95;
   }
   
   /*DROPDOWN MENU */
@@ -100,7 +82,7 @@
   }
   
   .dropdown_menu.open {
-    height: 240px;
+    height: 340px;
   }
   
   .dropdown_menu li {
@@ -110,7 +92,7 @@
     justify-content: center;
   }
   
-  .dropdown_menu .action_btn {
+  .dropdown_menu .user-pic {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -120,7 +102,7 @@
   @media(max-width:992px) {
   
     .navbar .links,
-    .navbar .action_btn {
+    .navbar .user-pic {
       display: none;
     }
   
@@ -140,24 +122,11 @@
     }
   }
   
-
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-.logo {
+  .logo {
     font-size: 2em;
     color: white;
     user-select: none;
-}
+  }
 
 .user-pic {
     width: 50px;
@@ -300,7 +269,7 @@ header {
     justify-content: center;
     gap: 12px;
     padding: 50px;
-    padding-top: 80px;
+    padding-top: 40px;
     border-radius: 10px;
 }
 
@@ -328,12 +297,6 @@ header {
     border: 5px outset gray;
 }
 
-@media only screen and (min-width: 768px) {
-    .skin-container {
-        padding: 100px;
-        padding-top: 120px;
-    }
-}
 
 
 .popup {

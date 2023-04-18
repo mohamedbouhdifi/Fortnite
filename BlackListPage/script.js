@@ -81,7 +81,6 @@ fetch(apiUrl)
   
           <span class="delete-icon" onclick="showConfirmationPopup()"><i class="fa fa-trash-o" style="color:red"></i></span>
           
-      
           <div class="popupDelete" id="confirmation-popup">
               <h2>Are you sure you want to delete?</h2>
               <button onclick="deleteItem()">Yes</button>

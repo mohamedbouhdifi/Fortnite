@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles.css">
   <title>Favourite Skins</title>
 
@@ -18,23 +19,52 @@
     <div class="navbar">
       <h2 class="logo">Project Arc</h2>
       <ul class="links">
-        <li><a href="/LandingPage/index.html">Home</a></li>
-        <li><a href="/HomePage/index.html">About</a></li>
-        <li><a href="/FavouritePage/FavouritePage.html">Favourite Skins</a></li>
+        <li><a href="/HomePage/index.html" >Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="/FavouritePage/FavouritePage.html" id="Favpage">Favourite Skins</a></li>
         <li><a href="/BlackListPage/BlacklistPage.html">Blacklisted Skins</a></li>
       </ul>
-      <a href="/LogInPage/LogInPage.html" class="action_btn">get started!</a>
+      <img src="/HomePage/images/profile.jpg" class="user-pic" onclick="toggleMenu()">
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div class="user-info">
+            <img src="/HomePage/images/profile.jpg" alt="">
+            <h3>User</h3>
+          </div>
+
+          <hr>
+          <a href="/EditProfile/Profile.html" class="sub-menu-link">
+            <i class="fa fa-edit" style="font-size:24px"></i>
+            <p>Edit Profile</p>
+            <span></span>
+          </a>
+          <a href="/Settings/PrivacyPolicy.html" class="sub-menu-link">
+            <i class="fa fa-gear" style="font-size:24px;"></i>
+            <p>Privacy Policy</p>
+            <span></span>
+          </a>
+          <a href="/LogInPage/LogInPage.html" class="sub-menu-link">
+            <i class="fa fa-sign-out" style="font-size:24px"></i>
+            <p>Logout</p>
+            <span></span>
+          </a>
+        </div>
+      </div>
+
       <div class="toggle_btn">
         <i class="fa-solid fa-bars"></i>
       </div>
     </div>
 
     <div class="dropdown_menu">
-      <li><a href="/LandingPage/index.html" id="Homepage">Home</a></li>
-      <li><a href="/HomePage/index.html">About</a></li>
+      <li><a href="/HomePage/index.html" id="Homepage">Home</a></li>
+      <li><a href="#">About</a></li>
       <li><a href="/FavouritePage/FavouritePage.html">Favourite Skins</a></li>
       <li><a href="/BlackListPage/BlacklistPage.html">Blacklisted Skins</a></li>
-      <li><a href="LogInPage.html" class="action_btn">get started!</a></li>
+      <li><a href="/EditProfile/Profile.html">Edit Profile</a></li>
+      <li><a href="/Settings/PrivacyPolicy.html">Settings</a></li>
+      <li><a href="/LogInPage/LogInPage.html">Log Out</a></li>
+
     </div>
   </header>
 
@@ -53,6 +83,7 @@
   </script>
 
   <main>
+    <h1 style="text-align: center; color: white; padding-top: 20px;">Favourite Skins</h1>
     <div class="skin-container"></div>
   </main>
 

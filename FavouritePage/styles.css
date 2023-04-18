@@ -9,11 +9,9 @@
 }
 
 body {
-  
+
   height: 100vh;
   background-color: #2f3136;
-  
-
 }
 
 li {
@@ -34,6 +32,7 @@ header {
 
   position: relative;
   padding: 0 2rem;
+  padding-top: 20px;
 }
 
 .navbar {
@@ -44,6 +43,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 20px;
 }
 
 .navbar .logo .a {
@@ -63,27 +63,7 @@ header {
   display: none;
 }
 
-.action_btn {
-  background-color: orange;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  outline: none;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: scale 0.2 ease;
-}
 
-.action_btn:hover {
-  scale: 1.05;
-  color: #fff;
-}
-
-.action_btn:active {
-  scale: 0.95;
-}
 
 /*DROPDOWN MENU */
 .dropdown_menu {
@@ -101,7 +81,7 @@ header {
 }
 
 .dropdown_menu.open {
-  height: 240px;
+  height: 340px;
 }
 
 .dropdown_menu li {
@@ -111,7 +91,7 @@ header {
   justify-content: center;
 }
 
-.dropdown_menu .action_btn {
+.dropdown_menu .user-pic {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -121,7 +101,7 @@ header {
 @media(max-width:992px) {
 
   .navbar .links,
-  .navbar .action_btn {
+  .navbar .user-pic {
     display: none;
   }
 
@@ -139,6 +119,12 @@ header {
     left: 2rem;
     width: unset;
   }
+}
+
+.logo {
+  font-size: 2em;
+  color: white;
+  user-select: none;
 }
 
 
@@ -162,7 +148,7 @@ header {
   margin-left: 40px;
 }
 
-#favskin {
+#Favpage {
   font-weight: bold;
 }
 
@@ -205,7 +191,7 @@ header {
   margin: 10px;
 }
 
-.sub-menu a{
+.sub-menu a {
   color: black;
 }
 
@@ -213,7 +199,7 @@ header {
   display: flex;
   align-items: center;
   background-color: white;
-  
+
 }
 
 .user-info h3 {
@@ -250,6 +236,7 @@ header {
   width: 100%;
   background-color: white;
 }
+
 .sub-menu-link span {
 
   background-color: white;
@@ -281,20 +268,21 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  padding: 100px;
-  padding-top: 120px;
+  padding: 50px;
+  padding-top: 40px;
   border-radius: 10px;
 }
 
 .skin-card {
-  width: 410px;
+  width: 100%;
+  max-width: 410px;
   height: auto;
   text-align: center;
   border: 5x solid black;
 }
 
 .skin-card img {
-  width: 410px;
+  width: 100%;
   height: auto;
   object-fit: cover;
   border: 5px outset gray;
@@ -307,6 +295,13 @@ header {
   background-color: black;
   color: whitesmoke;
   border: 5px outset gray;
+}
+
+@media only screen and (min-width: 768px) {
+  .skin-container {
+    padding: 100px;
+    padding-top: 120px;
+  }
 }
 
 .popup {
@@ -334,8 +329,9 @@ header {
   height: auto;
 }
 
-.buttonC{
-  background-color: #4CAF50; /* Green */
+.buttonC {
+  background-color: #4CAF50;
+  /* Green */
   border: none;
   color: white;
   padding: 10px 24px;
@@ -347,38 +343,108 @@ header {
   cursor: pointer;
 }
 
-#lose-button{
-  background-color: #f44336; /* Red */
+#lose-button {
+  background-color: #f44336;
+  /* Red */
 }
 
-#pickaxetext, #emote{
+#pickaxetext,
+#emote {
   font-size: 24px;
   font-weight: bold;
 }
 
-.pickaxe{
+.pickaxe {
   float: left;
   text-align: center;
   padding-right: 50px;
 }
-.emote{
+
+.emote {
   float: left;
   text-align: center;
 }
 
-.comments{
+.comments {
   float: left;
 }
 
+textarea {
+  width: 300%;
+  height: 100%;
+  resize: vertical;
+}
 .btn-close {
-  margin-left: 980px;
-  margin-top: -20px;
   background-color: transparent;
+  font-size: 48px;
   border: 0;
-  font-size: 60px;
   cursor: pointer;
-  position: absolute;
-  border-radius: 5%;
   transition: all 0.2s ease-in;
+  float: right;
 }
 
+@media(max-width: 768px) {
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+    max-height: 90%;
+    overflow: scroll;
+    clear: both;
+  }
+  
+  .popup-content img {
+    width: 80%;
+    height: auto;
+    max-width: 90%;
+    max-height: 50vh;
+    object-fit: contain;
+    margin: 10px 0;
+   
+  }
+  .popup-content img {
+    float: none;
+    width: 90%;
+    height: auto;
+  }
+  
+  .btn-close {
+    font-size: 36px;
+  }
+  .pickaxe {
+    float: none;
+    text-align: center;
+    padding-right: 0px;
+    
+  }
+  .emote {
+    float: none;
+    text-align: center;
+  }
+  
+  .comments {
+    float: none;
+    text-align: center;
+    
+  }
+
+  textarea {
+    width: 100%;
+
+  }
+}

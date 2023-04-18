@@ -7,6 +7,19 @@ function toggleMenu() {
   subMenu.classList.toggle("open-menu");
 }
 
+function showConfirmationPopup() {
+  document.getElementById("confirmation-popup").style.display = "block";
+}
+
+function hideConfirmationPopup() {
+  document.getElementById("confirmation-popup").style.display = "none";
+}
+
+function SendReason() {
+  console.log("Item Blacklisted.");
+  hideConfirmationPopup();
+}
+
 fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
@@ -55,14 +68,23 @@ container.addEventListener('click', event => {
     popup.innerHTML = `
         <div class="popup-content">
 
-          <button class="btn-close">&times;</button>
+        <span class="btn-close"><i class="fa fa-close"></i></span>
+
+          
+      
+          <div class="popupReason" id="confirmation-popup">
+              <h2>What is you reason to blacklist this skin?</h2>
+              <textarea id="comment" placeholder="Enter your reason here..."></textarea><br>
+              <button onclick="SendReason()">Save</button>
+              <button onclick="hideConfirmationPopup()" style= "background-color: red;">Cancel</button>
+          </div>
           
           <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
           <h1>${skinCard.querySelector('img').dataset.name}</h1>
           <h3>${skinCard.querySelector('img').alt}</h3>     
           
           <button id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"></i></button>
-          <button class="banbtn"><i class="fa fa-ban" aria-hidden="true"></i></button>
+          <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true"></i></span>
 
           
         </div>
