@@ -48,6 +48,7 @@ header {
 .navbar .logo .a {
   font-size: 1.5rem;
   font-weight: bold;
+  
 }
 
 .navbar .links {
@@ -141,6 +142,10 @@ header {
   }
 }
 
+.logo{
+  font-size: 36px;
+  color: white;
+}
 .user-pic {
   width: 50px;
   border-radius: 50%;

@@ -8,12 +8,11 @@
     font-family: 'Poppins', sans-serif;
   }
   
-  body {
-    
+  body { 
     height: 100vh;
     background-color: #2f3136;
-    
-  
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
   
   li {
