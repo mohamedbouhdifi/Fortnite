@@ -1,56 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Favourite Skins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/FavouritePage/styles.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Log in</title>
+  <link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
   <header>
-  <h2 class="logo">Project Arc</h2>
-    <nav class="navigation">
-      <a href="/HomePage/index.html">Home</a>
-      <a href="#" class="link-left">About</a>
-      <a href="/FavouritePage/FavouritePage.html" id="favskin" class="link-left">Favourite Skin</a>
-      <a href="/BlackListPage/BlacklistPage.html" class="link-left">Blacklist</a>
-      <img src="/HomePage/images/profile.jpg" class="user-pic" onclick="toggleMenu()">
-      <div class="sub-menu-wrap" id="subMenu">
-        <div class="sub-menu">
-          <div class="user-info">
-              <img src="/HomePage/images/profile.jpg" alt="">
-              <h3>User</h3>
-          </div>
-          
-          <hr>
-            <a href="/EditProfile/Profile.html" class="sub-menu-link">
-              <i class="fa fa-edit" style="font-size:24px"></i>
-              <p>Edit Profile</p>
-              <span></span>
-            </a>
-            <a href="/Settings/PrivacyPolicy.html" class="sub-menu-link">
-              <i class="fa fa-gear" style="font-size:24px;"></i>
-              <p>Privacy Policy</p>
-              <span></span>
-            </a>
-            <a href="/LogInPage/LogInPage.html" class="sub-menu-link">
-              <i class="fa fa-sign-out" style="font-size:24px"></i>
-              <p>Logout</p>
-              <span></span>
-            </a>
-
-            </div>
-            
-            
-          </div> 
+    <div class="navbar">
+      <h2 class="logo">Project Arc</h2>
+      <ul class="links">
+        <li><a href="/LandingPage/index.html">Home</a></li>
+        <li><a href="/HomePage/index.html">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <a href="/LogInPage/LogInPage.html" class="action_btn">get started!</a>
+      <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
       </div>
-    </nav>
+    </div>
+
+    <div class="dropdown_menu">
+      <li><a href="/LandingPage/index.html">Home</a></li>
+      <li><a href="/HomePage/index.html">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="LogInPage.html" class="action_btn">get started!</a></li>
+    </div>
   </header>
+
+  <script>
+    const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+
+    toggleBtn.onclick = function () {
+      dropDownMenu.classList.toggle('open')
+      const isOpen = dropDownMenu.classList.contains('open')
+
+      toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
+
+    }
+  </script>
+
   <main>
     <div class="skin-container"></div>
   </main>

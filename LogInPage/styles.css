@@ -1,70 +1,151 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,600;1,100&display=swap");
 
-*{
+/*NAVBAR*/
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  }
+}
 
-body{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+body {
+  
+  height: 100vh;
+  background-color: #000;
   background: url("/LogInPage/images/Fortnite.jpg") no-repeat;
   background-size: cover;
-  
-}
-header{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 99;
+  background-position: center;
+
 }
 
-.logo{
-  font-size: 2em;
-  color: #fff;
-  user-select: none;
+li {
+  list-style: none;
 }
 
-.navigation a {
-  position: relative;
-  font-size: 1.1em;
-  color: #fff;
+a {
   text-decoration: none;
-  font-weight: 500;
-  margin-left: 40px;
+  color: #fff;
+  font-size: 1rem;
 }
 
-.navigation a::after{
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -6px;
+a:hover {
+  color: orange;
+}
+
+header {
+
+  position: relative;
+  padding: 0 2rem;
+}
+
+.navbar {
   width: 100%;
-  height: 3px;
-  background: #fff;
-  border-radius: 5px;
-  transform-origin: right;
-  transform: scaleX(0 );
-  transition: transform .5s;
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.navigation a:hover::after{
-  transform: scaleX(1);
-  transform-origin: left;
+.navbar .logo .a {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar .toggle_btn {
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+.action_btn {
+  background-color: orange;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: scale 0.2 ease;
+}
+
+.action_btn:hover {
+  scale: 1.05;
+  color: #fff;
+}
+
+.action_btn:active {
+  scale: 0.95;
+}
+
+/*DROPDOWN MENU */
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  right: 2rem;
+  top: 60px;
+  height: 0;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 02s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open {
+  height: 240px;
+}
+
+.dropdown_menu li {
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown_menu .action_btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* RESPONSIVE DESIGN */
+@media(max-width:992px) {
+
+  .navbar .links,
+  .navbar .action_btn {
+    display: none;
+  }
+
+  .navbar .toggle_btn {
+    display: block;
+  }
+
+  .dropdown_menu {
+    display: block;
+  }
+}
+
+@media(max-width:576px) {
+  .dropdown_menu {
+    left: 2rem;
+    width: unset;
+  }
 }
 
 
 
-.wrapper{
+.wrapper {
   position: relative;
   width: 400px;
   height: 440px;
@@ -80,53 +161,57 @@ header{
   transition: height .2s ease;
 }
 
-.wrapper.active{
+.wrapper.active {
   height: 520px;
 }
 
-.wrapper .form-box{
+.wrapper .form-box {
   width: 100%;
   padding: 40px;
 }
 
-.wrapper .form-box.login{
+.wrapper .form-box.login {
   transition: transform .18 ease;
   transform: translateX(0);
-  
+
 }
 
-.wrapper.active .form-box.login{
+.wrapper.active .form-box.login {
   transition: none;
   transform: translateX(-400px);
 
 }
-.wrapper .form-box.register{
+
+.wrapper .form-box.register {
+  
   position: absolute;
   transition: none;
   transform: translateX(400px);
-}   
-
-.wrapper.active .form-box.register{
-  transition: transform .18 ease;
-  transform: translateX(0);
-  
 }
 
-.form-box h2{
+.wrapper.active .form-box.register {
+  
+  transition: transform .18 ease;
+  transform: translateX(0);
+
+}
+
+.form-box h2 {
   font-size: 2em;
   color: #fff;
   text-align: center;
 }
 
-.input-box{
+.input-box {
   position: relative;
   width: 100%;
   height: 50px;
-  border-bottom: 2px solid #fff;;
+  border-bottom: 2px solid #fff;
+  ;
   margin: 30px 0;
 }
 
-.input-box label{
+.input-box label {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -139,11 +224,11 @@ header{
 }
 
 .input-box input:focus~label,
-.input-box input:valid~label{
+.input-box input:valid~label {
   top: -5px;
 }
 
-.input-box input{
+.input-box input {
   width: 100%;
   height: 100%;
   background: transparent;
@@ -155,7 +240,7 @@ header{
   padding: 0 35px 0 5px;
 }
 
-.input-box .icon{
+.input-box .icon {
   position: absolute;
   right: 8px;
   font-size: 1.2em;
@@ -163,7 +248,7 @@ header{
   line-height: 57px;
 }
 
-.remember-forgot{
+.remember-forgot {
   font-size: .9em;
   color: #fff;
   font-weight: 500;
@@ -172,21 +257,21 @@ header{
   justify-content: space-between;
 }
 
-.remember-forgot label input{
+.remember-forgot label input {
   accent-color: #fff;
   margin-right: 3px;
 }
 
-.remember-forgot a{
+.remember-forgot a {
   color: #fff;
   text-decoration: none;
 }
 
-.remember-forgot a:hover{
+.remember-forgot a:hover {
   text-decoration: underline;
 }
 
-.btn{
+.btn {
   width: 100%;
   height: 45px;
   background: #fff;
@@ -199,7 +284,8 @@ header{
   font-weight: 1000;
 }
 
-.login-register{
+.login-register {
+  
   font-size: .9em;
   color: #fff;
   text-align: center;
@@ -207,12 +293,12 @@ header{
   margin: 25px 0 10px;
 }
 
-.login-register p a{
+.login-register p a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
 }
 
-.login-register p a:hover{
+.login-register p a:hover {
   text-decoration: underline;
 }
