@@ -25,7 +25,7 @@ fetch(apiUrl)
   .then(data => {
     const skins = data.data.filter(item => item.type.value === 'outfit');
 
-    for (let index = 0; index < 85; index++) {
+    for (let index = 0; index < 83; index++) {
       const skin = skins[index];
 
       if (skin.name != "null" && skin.images.featured != null) {
@@ -68,7 +68,7 @@ container.addEventListener('click', event => {
     popup.innerHTML = `
         <div class="popup-content">
 
-        <span class="btn-close"><i class="fa fa-close"></i></span>
+        <span class="btn-close"><i class="fa fa-close"  style="color: white";></i></span>
 
           
       
@@ -80,11 +80,11 @@ container.addEventListener('click', event => {
           </div>
           
           <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
-          <h1>${skinCard.querySelector('img').dataset.name}</h1>
-          <h3>${skinCard.querySelector('img').alt}</h3>     
+          <h1  style="color: white";>${skinCard.querySelector('img').dataset.name}</h1>
+          <h3  style="color: white";>${skinCard.querySelector('img').alt}</h3>     
           
-          <button id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"></i></button>
-          <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true"></i></span>
+          <button id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"  style="color: white";></i></button>
+          <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true" style="color: white";></i></span>
 
           
         </div>

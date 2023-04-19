@@ -101,8 +101,8 @@ container.addEventListener('click', event => {
           <br><br>
           <form action="/html/tags/html_form_tag_action.cfm" method="post" class= "comments">
           <div class="comment-box">
-            <h3>Comment:</h3>
-            <textarea id="comment" placeholder="Enter your comment here..."></textarea><br>
+            <h3>Notes:</h3>
+            <textarea id="comment" placeholder="Enter your notes here..."></textarea><br>
             <button onclick="saveComment()" class= "buttonC" >Save</button>
             </div> 
         </form>          

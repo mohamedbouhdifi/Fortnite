@@ -1,18 +1,26 @@
+body {
+  
+  height: 100vh;
+  background: url("/LogInPage/images/Studio.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
 
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: black;
+    
   }
 
 h1{
    text-align: center;
    padding-bottom: 160px;
-   
-   
+   color: white;
 }
+
 h2,.container{
   text-align: center;
-  
+  color: white;
 }
 
 
