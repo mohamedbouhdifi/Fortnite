@@ -11,7 +11,7 @@
 body {
   
   height: 100vh;
-  background: url("/LogInPage/images/Fortnite.jpg") no-repeat;
+  background: url("/images/Fortnite_background.jpg") no-repeat;
     background-size: cover;
     background-position: center;
 
@@ -158,7 +158,7 @@ main {
 
 .wrapper {
   width: 400px;
-  height: 440px;
+  height: 455px;
   float: none;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, .5);

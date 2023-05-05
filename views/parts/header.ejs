@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fortnite Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <h2 class="logo">Project Arc</h2>
+            <ul class="links">
+                <li><a href="Avatars" id="Homepage">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="FavouritePage" id="Favpage">Favourite Skins</a></li>
+                <li><a href="BlacklistPage" id="blackListSkin">Blacklisted Skins</a></li>
+            </ul>
+            <img src="/images/HomeImg/profile.jpg" class="user-pic" onclick="toggleMenu()">
+            <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img src="/images/HomeImg/profile.jpg" alt="">
+                        <h3>User</h3>
+                    </div>
+
+                    <hr>
+                    <a href="Profile" class="sub-menu-link">
+                        <i class="fa fa-edit" style="font-size:24px"></i>
+                        <p>Edit Profile</p>
+                        <span></span>
+                    </a>
+                    <a href="PrivacyPolicy" class="sub-menu-link">
+                        <i class="fa fa-gear" style="font-size:24px;"></i>
+                        <p>Privacy Policy</p>
+                        <span></span>
+                    </a>
+                    <a href="Login" class="sub-menu-link">
+                        <i class="fa fa-sign-out" style="font-size:24px"></i>
+                        <p>Logout</p>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+
+        <div class="dropdown_menu">
+            <li><a href="Avatars" id="Homepage">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="FavouritePage" id="Favpage">Favourite Skins</a></li>
+            <li><a href="BlacklistPage" id="blackListSkin">Blacklisted Skins</a></li>
+            <li><a href="Profile">Edit Profile</a></li>
+            <li><a href="PrivacyPolicy">Settings</a></li>
+            <li><a href="Login">Log Out</a></li>
+
+        </div>
+    </header>
+
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown_menu')
+
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+
+            toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
+
+        }
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>

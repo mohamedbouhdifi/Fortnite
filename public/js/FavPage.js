@@ -3,9 +3,6 @@ const apiUrl = 'https://fortnite-api.com/v2/cosmetics/br';
 const container = document.querySelector('.skin-container');
 
 
-function toggleMenu() {
-  subMenu.classList.toggle("open-menu");
-}
 function doitWin() {
   document.getElementById("wins").innerHTML = "you";
 }
@@ -89,13 +86,13 @@ container.addEventListener('click', event => {
           </div><br>
           <div class= "pickaxe">
               <span id="pickaxetext">Pickaxe</span><br> 
-              <a href="#" id="pickaxe"><img src="/FavouritePage/images/pickaxe.png" alt="pickaxe" style="width: 200px;
+              <a href="#" id="pickaxe"><img src="images/FavPageImg/pickaxe.png" alt="pickaxe" style="width: 200px;
               height: 200px;"></a> 
             </div>
             
           <div class= "emote">
               <span id= "emote">Emote</span><br>
-              <a href="#"><img src="/FavouritePage/images/emote.png" alt="pickaxe" style="width: 200px;
+              <a href="#"><img src="images/FavPageImg/emote.png" alt="emote" style="width: 200px;
               height: 200px;"></a>      
           </div>
           <br><br>

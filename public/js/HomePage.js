@@ -2,41 +2,26 @@ let subMenu = document.getElementById("subMenu");
 const apiUrl = 'https://fortnite-api.com/v2/cosmetics/br';
 const container = document.querySelector('.skin-container');
 
-const toggleBtn = document.querySelector('.toggle_btn')
-    const toggleBtnIcon = document.querySelector('.toggle_btn i')
-    const dropDownMenu = document.querySelector('.dropdown_menu')
 
-    toggleBtn.onclick = function () {
-      dropDownMenu.classList.toggle('open')
-      const isOpen = dropDownMenu.classList.contains('open')
-
-      toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
-
-    }
-
-function toggleMenu() {
-  subMenu.classList.toggle("open-menu");
-}
 function showConfirmationPopup() {
-    document.getElementById("confirmation-popup").style.display = "block";
+  document.getElementById("confirmation-popup").style.display = "block";
 }
 
 function hideConfirmationPopup() {
-    document.getElementById("confirmation-popup").style.display = "none";
+  document.getElementById("confirmation-popup").style.display = "none";
 }
 
-function deleteItem() {
-    console.log("Item deleted.");
-    hideConfirmationPopup();
+function SendReason() {
+  console.log("Item Blacklisted.");
+  hideConfirmationPopup();
 }
-
 
 fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
     const skins = data.data.filter(item => item.type.value === 'outfit');
 
-    for (let index = 8; index < 16; index++) {
+    for (let index = 0; index < 83; index++) {
       const skin = skins[index];
 
       if (skin.name != "null" && skin.images.featured != null) {
@@ -71,36 +56,36 @@ fetch(apiUrl)
   })
   .catch(error => console.error(error));
 
-  container.addEventListener('click', event => {
-    const skinCard = event.target.closest('.skin-card');
-    if (skinCard) {
-      const popup = document.createElement('div');
-      popup.classList.add('popup');
-      popup.innerHTML = `
-          <div class="popup-content">
-  
-          <span class="delete-icon" onclick="showConfirmationPopup()"><i class="fa fa-trash-o" style="color:red"></i></span>
+container.addEventListener('click', event => {
+  const skinCard = event.target.closest('.skin-card');
+  if (skinCard) {
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    popup.innerHTML = `
+        <div class="popup-content">
+
+        <span class="btn-close"><i class="fa fa-close"  style="color: white";></i></span>
+
           
-          <div class="popupDelete" id="confirmation-popup">
-              <h2>Are you sure you want to delete?</h2>
-              <button onclick="deleteItem()">Yes</button>
-              <button onclick="hideConfirmationPopup()">No</button>
+      
+          <div class="popupReason" id="confirmation-popup">
+              <h2>What is you reason to blacklist this skin?</h2>
+              <textarea id="comment" placeholder="Enter your reason here..."></textarea><br>
+              <button onclick="SendReason()">Save</button>
+              <button onclick="hideConfirmationPopup()" style= "background-color: red;">Cancel</button>
           </div>
-            <span class="btn-close"><i class="fa fa-close"></i></span>
-            
-            <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
-            <h1>${skinCard.querySelector('img').dataset.name}</h1>
-            <h3>${skinCard.querySelector('img').alt}</h3><br>
-            <div>
-            <div class="comment-box">
-            <h3>Reason:</h3>
-            <textarea id="comment" placeholder="Enter your reason here..."></textarea><br>
-            <button onclick="saveComment()" class= "buttonC" >Save</button>
-            </div>         
           
-          </div>
-        `;
-      document.body.appendChild(popup);
+          <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
+          <h1  style="color: white";>${skinCard.querySelector('img').dataset.name}</h1>
+          <h3  style="color: white";>${skinCard.querySelector('img').alt}</h3>     
+          
+          <button id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"  style="color: white";></i></button>
+          <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true" style="color: white";></i></span>
+
+          
+        </div>
+      `;
+    document.body.appendChild(popup);
 
     const closeBtn = popup.querySelector('.btn-close');
     closeBtn.addEventListener('click', () => {

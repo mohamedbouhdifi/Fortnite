@@ -1,10 +1,10 @@
-body {
+main {
     font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    color: #333333;
-    background-color: #f7f7f7;
+    color: white;
     padding: 20px;
+    padding-top: 50px;
   }
   
   .container {
@@ -15,35 +15,31 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
   
-  h1 {
+  main h1 {
     font-size: 36px;
     margin-top: 0;
     margin-bottom: 20px;
   }
   
-  h2 {
+  main h2 {
     font-size: 24px;
     margin-top: 30px;
     margin-bottom: 10px;
   }
   
-  p {
+  main p {
     margin-top: 0;
     margin-bottom: 20px;
   }
   
-  ul {
+  main ul {
     margin-top: 0;
     margin-bottom: 20px;
     padding-left: 20px;
   }
   
-  ul li {
+  main ul li {
     margin-bottom: 10px;
-  }
-  
-  a {
-    color: #0070c9;
   }
   
   a:hover {
