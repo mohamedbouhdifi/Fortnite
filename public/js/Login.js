@@ -1,4 +1,3 @@
-const wrapper = document.querySelector('.wrapper');
 const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
 
@@ -13,14 +12,6 @@ const toggleBtn = document.querySelector('.toggle_btn')
       toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
 
     }
-
-registerLink.addEventListener('click', ()=> {
-    wrapper.classList.add('active');
-});
-
-loginLink.addEventListener('click', ()=> {
-    wrapper.classList.remove('active');
-});
 
 const userBox = document.querySelector('.user-box');
 const settingsMenu = document.createElement('div');

@@ -40,6 +40,11 @@ app.get("/Login", (req: any, res: any) => {
     res.render("LoginPage");
 })
 
+app.get("/Register", (req: any, res: any) => {
+    
+    res.render("RegisterPage");
+})
+
 app.get("/Avatars", (req: any, res: any) => {
     res.render("Homepage");
 })
