@@ -21,15 +21,6 @@ settingsMenu.classList.add('settings-menu');
 logoutOption.classList.add('logout-option');
 logoutOption.innerText = 'Logout';
 
-userBox.addEventListener('click', () => {
-  settingsMenu.style.display = 'block';
-});
 
-document.addEventListener('click', (event) => {
-  if (!userBox.contains(event.target) && !settingsMenu.contains(event.target)) {
-    settingsMenu.style.display = 'none';
-  }
-});
 
 settingsMenu.appendChild(logoutOption);
-userBox.appendChild(settingsMenu);

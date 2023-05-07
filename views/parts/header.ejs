@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Fortnite Selection</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -28,7 +29,7 @@
                 <div class="sub-menu">
                     <div class="user-info">
                         <img src="/images/HomeImg/profile.jpg" alt="">
-                        <h3>User</h3>
+                        <h3><%= name %></h3>
                     </div>
 
                     <hr>
@@ -42,7 +43,7 @@
                         <p>Privacy Policy</p>
                         <span></span>
                     </a>
-                    <a href="Login" class="sub-menu-link">
+                    <a href="Logout" class="sub-menu-link">
                         <i class="fa fa-sign-out" style="font-size:24px"></i>
                         <p>Logout</p>
                         <span></span>
@@ -62,7 +63,7 @@
             <li><a href="BlacklistPage" id="blackListSkin">Blacklisted Skins</a></li>
             <li><a href="Profile">Edit Profile</a></li>
             <li><a href="PrivacyPolicy">Settings</a></li>
-            <li><a href="Login">Log Out</a></li>
+            <li><a href="Logout">Log Out</a></li>
 
         </div>
     </header>

@@ -1,32 +1,32 @@
 <%- include ("parts/loginHeader") %>
 
     <main>
-        <div class="wrapper" style="height: 590px; margin-top: 110px;">
+        <div class="wrapper" style="height: 600px; margin-top: 110px;">
             <div class="form-box register">
                 <h2>Registration</h2>
-                <form action="#">
+                <form id="form1" method="post">
                     <div class="input-box">
                         <span class="icon"><ion-icon name="person"></ion-icon></span>
-                        <input type="text" required>
+                        <input type="text" name="username" required>
                         <label for="email">Username</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input type="email" required>
+                        <input type="email" name="email" required>
                         <label for="email">Email</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label for="password">Password</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input type="password" required>
+                        <input type="password" name="passwordConf" required>
                         <label for="passwordconf">ConfirmPassword</label>
                     </div>
                     <div class="remember-forgot">
-                        <label><input type="checkbox">I agree to the terms & conditions</label>
+                        <label><input type="checkbox" required>I agree to the terms & conditions</label>
                     </div>
                     <button type="submit" class="btn">Register</button>
                     <div class="login-register">
@@ -35,6 +35,11 @@
                         </p>
                     </div>
                 </form>
+                <div class="mssg bg-danger">
+                    <span id="check" style=" color: lightgreen; text-align: center;"></span>
+                </div>
+                <div id="LangTable"><a href="Login" id="aa"></a>
+                </div>
             </div>
         </div>
 
@@ -42,8 +47,41 @@
 
     <script src="/js/Login.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </body>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#form1").submit(function (event) {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Register',
+                    data: $('#form1').serialize(),
+                    dataType: "json",
+                    success: function (response) {
+                        //alert("a");
+                        //console.log(response.Success);
+                        $('#form1')[0].reset();
+
+                        document.getElementById("check").innerHTML = response.Success;
+                        //ADD THIS CODE
+                        setTimeout(function () {
+                            document.getElementById("check").innerHTML = "";
+                        }, 3000);
+                        if (response.Success == "You are regestered,You can login now.") {
+                            document.getElementById("aa").click();
+                        };
+                    },
+                    error: function () {
+                    }
+                })
+            });
+        });
+    </script>
 
     <head>
         <link rel="stylesheet" href="/css/Login.css">

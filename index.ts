@@ -1,73 +1,61 @@
 import express from "express";
-
 const app = express();
-/*
-const { MongoClient} = require('mongodb');
 
-const uri: string = "mongodb+srv://s122085:Pw00057057@cluster0.1gluz1x.mongodb.net/?retryWrites=true&w=majority";
+var env = require('dotenv').config();
+var ejs = require('ejs');
+var path = require('path');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
-const client = new MongoClient(uri, { useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Student:Student@cluster0.am7fvcj.mongodb.net/LoginSystem?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, (err: any) => {
+  if (!err) {
+    console.log('MongoDB Connection Succeeded.');
+  } else {
+    console.log('Error in DB connection : ' + err);
+  }
+});
 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+});
 
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}));
 
-const main = async () => {
-    try {
-        await client.connect();
-        
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-}
-
-main();*/
-
-
+app.set('views', path.join(__dirname, 'views'));
 app.set("port", 3000);
 app.set("view engine", "ejs");
 
 app.use(express.static('public'))
-app.use(express.json({ limit: "1mb" }));
-app.use(express.urlencoded({ extended: true }))
-
-app.get("/LandingPage", (req: any, res: any) => {
-    res.render("LandingPage");
-})
-
-app.get("/Login", (req: any, res: any) => {
-    
-    res.render("LoginPage");
-})
-
-app.get("/Register", (req: any, res: any) => {
-    
-    res.render("RegisterPage");
-})
-
-app.get("/Avatars", (req: any, res: any) => {
-    res.render("Homepage");
-})
-
-app.get("/FavouritePage", (req: any, res: any) => {
-    res.render("FavouritePage");
-})
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 
 
-app.get("/BlacklistPage", (req: any, res: any) => {
-    res.render("BlacklistPage");
-    
-})
+var index = require('./routes/index');
+app.use('/', index);
 
-app.get("/Profile", (req: any, res: any) => {
-    res.render("Profile");
-    
-})
-
-app.get("/PrivacyPolicy", (req: any, res: any) => {
-    res.render("PrivacyPolicy");
-    
-})
+app.use(function (req: any, res: any, next: any) {
+    var err : any = new Error('File Not Found');
+    err.status  = 404;
+    next(err);
+  });
+  
+  app.use(function (err : any, req : any, res : any, next : any) {
+    res.status(err.status || 500);
+    res.send(err.message);
+  });
 
 
 app.listen(app.get("port"), () => {
