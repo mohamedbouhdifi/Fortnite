@@ -138,6 +138,8 @@ router.get("/FavouritePage", (req: any, res: any) => {
 })
 
 
+
+
 router.get("/BlacklistPage", (req: any, res: any) => {
 	console.log("BlacklistPage");
 	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
@@ -175,7 +177,20 @@ router.get("/Profile", (req: any, res: any) => {
 })
 
 router.get("/PrivacyPolicy", (req: any, res: any) => {
-	res.render("PrivacyPolicy");
+	console.log("PrivacyPolicy");
+	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
+		console.log("data");
+		console.log(data);
+		if (!data) {
+			res.redirect('/Login');
+		} else {
+			//console.log("found");
+			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+			res.setHeader('Pragma', 'no-cache');
+			res.setHeader('Expires', '0');
+			return res.render('PrivacyPolicy', { "name": data.username, "email": data.email });
+		}
+	});
 
 })
 

@@ -28,26 +28,30 @@ fetch(apiUrl)
         if (skin.rarity.displayValue == "Legendary" || skin.rarity.displayValue == "Epic" || skin.rarity.displayValue == "Rare" || skin.rarity.displayValue == "Uncommon") {
           const card = document.createElement('div');
           card.classList.add('skin-card');
-          if (skin.rarity.displayValue == "Legendary") {
-            card.innerHTML = 
-          `<img src="${skin.images.icon}" style="background-image: linear-gradient( 90.5deg,  rgba(255,207,139,0.50) 1.1%, rgba(255,207,139,1) 81.3% );" alt="${skin.description}" data-src="${skin.images.featured}" data-name="${skin.name}">
-          <h3>${skin.name}</h3>`;
+          const { name, images, rarity, description } = skin;
+          switch (rarity.displayValue) {
+            case "Legendary":
+              card.innerHTML = `
+                <img src="${images.icon}" style="background-image: linear-gradient( 90.5deg,  rgba(255,207,139,0.50) 1.1%, rgba(255,207,139,1) 81.3% );" alt="${description}" data-src="${images.featured}" data-name="${name}">
+                <h3>${name}</h3>`;
+              break;
+            case "Epic":
+              card.innerHTML = `
+                <img src="${images.icon}" style="background-image: radial-gradient( circle farthest-corner at 83.7% 4.3%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% );" alt="${description}" data-src="${images.featured}" data-name="${name}">
+                <h3>${name}</h3>`;
+              break;
+            case "Uncommon":
+              card.innerHTML = `
+                <img src="${images.icon}" style="background-image: linear-gradient( 73.1deg,  rgba(34,126,34,1) 8%, rgba(99,162,17,1) 86.9% );" alt="${description}" data-src="${images.featured}" data-name="${name}">
+                <h3>${name}</h3>`;
+              break;
+            default:
+              card.innerHTML = `
+                <img src="${images.icon}" style="background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% );" alt="${description}" data-src="${images.featured}" data-name="${name}">
+                <h3>${name}</h3>`;
+              break;
           }
-          else if (skin.rarity.displayValue == "Epic") {
-            card.innerHTML = 
-          `<img src="${skin.images.icon}" style="background-image: radial-gradient( circle farthest-corner at 83.7% 4.3%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% );" alt="${skin.description}" data-src="${skin.images.featured}" data-name="${skin.name}">
-          <h3>${skin.name}</h3>`;
-          }
-          else if (skin.rarity.displayValue == "Uncommon") {
-            card.innerHTML = 
-          `<img src="${skin.images.icon}" style="background-image: linear-gradient( 73.1deg,  rgba(34,126,34,1) 8%, rgba(99,162,17,1) 86.9% );" alt="${skin.description}" data-src="${skin.images.featured}" data-name="${skin.name}">
-          <h3>${skin.name}</h3>`;
-          } 
-          else {
-            card.innerHTML = 
-          `<img src="${skin.images.icon}" style="background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% );" alt="${skin.description}" data-src="${skin.images.featured}" data-name="${skin.name}">
-          <h3>${skin.name}</h3>`;
-          }
+          
           container.appendChild(card);
       
         }
