@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-childFavSkinSchema = new Schema({
+var childFavSkinSchema = new Schema({
 	skinTitle: String,
 	description: String,
 	image: String,
@@ -35,6 +35,7 @@ userSchema = new Schema( {
 	passwordConf: String,
 	Fortnite: childFortniteSchema,
 }),
+
 User = mongoose.model('User', userSchema);
 
 

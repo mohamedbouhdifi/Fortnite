@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+const hashUtils = require('../utils/hashUtils');
 
 
 router.get("/", (req: any, res: any) => {
@@ -33,13 +34,13 @@ router.post('/Register', (req: any, res: any, next: any) => {
 						} else {
 							c = 1;
 						}
+						const hashedPassword = hashUtils.hash(personInfo.password);
 
 						var newPerson = new User({
 							unique_id: c,
 							email: personInfo.email,
 							username: personInfo.username,
-							password: personInfo.password,
-							passwordConf: personInfo.passwordConf,
+							password: hashedPassword,
 							Fortnite: {
 								childFortniteSchema: {
 									Favskins: [Object],
@@ -74,24 +75,25 @@ router.get('/Login', function (req: any, res: any, next: any) {
 });
 
 router.post('/Login', function (req: any, res: any, next: any) {
-	//console.log(req.body);
-	User.findOne({ email: req.body.email }, function (err: any, data: any) {
-		if (data) {
-
-			if (data.password == req.body.password) {
-				//console.log("Done Login");
-				req.session.userId = data.unique_id;
-				//console.log(req.session.userId);
-				res.send({ "Success": "Success!" });
-
-			} else {
-				res.send({ "Success": "Wrong password!" });
-			}
-		} else {
-			res.send({ "Success": "This Email Is not regestered!" });
-		}
-	});
+    User.findOne({ email: req.body.email }, function (err: any, data: any) {
+        if (data) {
+            hashUtils.comparePassword(req.body.password, data.password, function (err: any, isMatch: any) {
+                if (err) {
+                    return res.send({ "Success": "Error occurred while comparing passwords" });
+                }
+                if (isMatch) {
+                    req.session.userId = data.unique_id;
+                    return res.send({ "Success": "Success!" });
+                } else {
+                    return res.send({ "Success": "Wrong password!" });
+                }
+            });
+        } else {
+            return res.send({ "Success": "This Email Is not registered!" });
+        }
+    });
 });
+
 
 
 router.get('/Avatars', function (req: any, res: any, next: any) {
