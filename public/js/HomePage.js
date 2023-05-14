@@ -11,10 +11,6 @@ function hideConfirmationPopup() {
   document.getElementById("confirmation-popup").style.display = "none";
 }
 
-function SendReason() {
-  console.log("Item Blacklisted.");
-  hideConfirmationPopup();
-}
 
 fetch(apiUrl)
   .then(response => response.json())
@@ -51,9 +47,9 @@ fetch(apiUrl)
                 <h3>${name}</h3>`;
               break;
           }
-          
+
           container.appendChild(card);
-      
+
         }
       }
     }
@@ -73,22 +69,39 @@ container.addEventListener('click', event => {
           
       
           <div class="popupReason" id="confirmation-popup">
-              <h2>What is you reason to blacklist this skin?</h2>
-              <textarea id="comment" placeholder="Enter your reason here..."></textarea><br>
-              <button onclick="SendReason()">Save</button>
-              <button onclick="hideConfirmationPopup()" style= "background-color: red;">Cancel</button>
+          <form action="/BlacklistSkin" method="POST">
+          <input type="hidden" name="name" value="${skinCard.querySelector('img').dataset.name}">
+          <input type="hidden" name="description" value="${skinCard.querySelector('img').alt}">
+          <input type="hidden" name="imageProfile" value="${skinCard.querySelector('img').src}">
+          <input type="hidden" name="image" value="${skinCard.querySelector('img').dataset.src}">
+
+                 
+          <h2>What is you reason to blacklist this skin?</h2>
+              <textarea id="comment" name="reason" placeholder="Enter your reason here..."></textarea><br>
+              <button type="submit" value="Blacklist" onclick="SendReason()">Save</button>
+          </form>
+          <button onclick="hideConfirmationPopup()" style= "background-color: red;">Cancel</button>
+            
           </div>
           
           <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
           <h1  style="color: white";>${skinCard.querySelector('img').dataset.name}</h1>
           <h3  style="color: white";>${skinCard.querySelector('img').alt}</h3>     
           
-          <button id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"  style="color: white";></i></button>
+          <form action="/FavSkins" method="POST">
+          <input type="hidden" name="name" value="${skinCard.querySelector('img').dataset.name}">
+          <input type="hidden" name="description" value="${skinCard.querySelector('img').alt}">
+          <input type="hidden" name="imageProfile" value="${skinCard.querySelector('img').src}">
+          <input type="hidden" name="image" value="${skinCard.querySelector('img').dataset.src}">
+          <button type="submit" value="FavSkins" id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"  style="color: white";></i></button>
           <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true" style="color: white";></i></span>
+          </form>
 
-          
         </div>
       `;
+
+
+
     document.body.appendChild(popup);
 
     const closeBtn = popup.querySelector('.btn-close');
