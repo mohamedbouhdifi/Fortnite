@@ -1,12 +1,91 @@
 <%- include ("parts/header") %>
   <main>
     <h1 style="text-align: center; color: white; padding-top: 20px;">Blacklisted Skins</h1>
-    <div class="skin-container"></div>
+
+    <% if (BlacklistSkins.length===0) { %>
+      <h1 style="text-align: center; color: white; padding-top: 200px;">No blacklisted skins yet</h1>
+      <% } else{ %>
+        <div class="skin-container">
+          <% for (let i=0; i < BlacklistSkins.length; i++) { let skin=BlacklistSkins[i]; %>
+            <div class="skin-card">
+              <img src="<%= skin.imageProfile %>" alt="<%= skin.description %>" data-src="<%= skin.image %>" data-name= "<%= skin.skinTitle %>"
+                style="background-image: linear-gradient( 90.5deg,  rgba(247, 1, 1, 0.5) 1.1%, rgb(245, 0, 0) 81.3% );">
+              <h3>
+                <%= skin.skinTitle %>
+              </h3>
+            </div>
+
+            <% } %>
+
+        </div>
+
+        <% } %>
+
+
   </main>
 
-  <script src="/js/BlacklistPage.js"></script>
-</body>
-<head>
-  <link rel="stylesheet" href="/css/BlackList.css">
-</head>
-</html>
+  </body>
+
+  <head>
+    <link rel="stylesheet" href="/css/BlackList.css">
+  </head>
+
+  </html>
+
+  <script>
+
+    const container = document.querySelector('.skin-container');
+
+
+    function showConfirmationPopup() {
+      document.getElementById("confirmation-popup").style.display = "block";
+    }
+
+    function hideConfirmationPopup() {
+      document.getElementById("confirmation-popup").style.display = "none";
+    }
+
+    function deleteItem() {
+      console.log("Item deleted.");
+      hideConfirmationPopup();
+    }
+
+
+    container.addEventListener('click', event => {
+      const skinCard = event.target.closest('.skin-card');
+      if (skinCard) {
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.innerHTML = `
+          <div class="popup-content">
+  
+          <span class="delete-icon" onclick="showConfirmationPopup()"><i class="fa fa-trash-o" style="color:red"></i></span>
+          
+          <div class="popupDelete" id="confirmation-popup">
+              <h2>Are you sure you want to delete?</h2>
+              <button onclick="deleteItem()">Yes</button>
+              <button onclick="hideConfirmationPopup()">No</button>
+          </div>
+            <span class="btn-close"><i class="fa fa-close"></i></span>
+            
+            <img src="${skinCard.querySelector('img').dataset.src}"}">
+            <h1>${skinCard.querySelector('img').dataset.name}</h1>
+            <h3>${skinCard.querySelector('img').alt}</h3><br>
+            <div>
+            <div class="comment-box">
+            <h3>Reason:</h3>
+            <textarea id="comment" placeholder="Enter your reason here..."></textarea><br>
+            <button onclick="saveComment()" class= "buttonC" >Save</button>
+            </div>         
+          
+          </div>
+        `;
+        document.body.appendChild(popup);
+
+        const closeBtn = popup.querySelector('.btn-close');
+        closeBtn.addEventListener('click', () => {
+          popup.remove();
+        });
+      }
+    });
+  </script>

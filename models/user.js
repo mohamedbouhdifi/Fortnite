@@ -5,6 +5,7 @@ childFavSkinSchema = new Schema({
 	skinTitle: String,
 	description: String,
 	image: String,
+	imageProfile: String,
 	pickaxe: String,
 	emote: String,
 	notes: String,
@@ -15,6 +16,7 @@ childFavSkinSchema = new Schema({
 childBlackListSkinSchema = new Schema({
 	skinTitle: String,
 	description: String,
+	imageProfile: String,
 	image: String,
 	reason: String,
 }),
@@ -34,5 +36,6 @@ userSchema = new Schema( {
 	Fortnite: childFortniteSchema,
 }),
 User = mongoose.model('User', userSchema);
+
 
 module.exports = User;
