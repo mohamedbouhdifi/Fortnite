@@ -102,6 +102,15 @@ textarea{
   color: black;
 }
 
+.Avatarbtn {
+  background: transparent;
+  border: none;
+  font-size: 55px;
+  outline: none;
+  margin-right: 15px;
+  color: black;
+}
+
 .starbtn:hover {
   cursor: pointer;
 }

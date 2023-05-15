@@ -65,7 +65,7 @@ container.addEventListener('click', event => {
         <div class="popup-content">
 
         <span class="btn-close"><i class="fa fa-close"  style="color: white";></i></span>
-
+          
           
       
           <div class="popupReason" id="confirmation-popup">
@@ -83,10 +83,20 @@ container.addEventListener('click', event => {
           <button onclick="hideConfirmationPopup()" style= "background-color: red;">Cancel</button>
             
           </div>
+
+          
           
           <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
           <h1  style="color: white";>${skinCard.querySelector('img').dataset.name}</h1>
           <h3  style="color: white";>${skinCard.querySelector('img').alt}</h3>     
+          
+          <form action="/Profile" method="POST">
+          <input type="hidden" name="name" value="${skinCard.querySelector('img').dataset.name}">
+          <input type="hidden" name="description" value="${skinCard.querySelector('img').alt}">
+          <input type="hidden" name="imageProfile" value="${skinCard.querySelector('img').src}">
+          <input type="hidden" name="image" value="${skinCard.querySelector('img').dataset.src}">
+          <button type="submit" onclick="changeProfilePic()" value="Profile" id="btnAvatar" class="Avatarbtn"><i class="fa fa-picture-o" aria-hidden="true"  style="color: white";></i></button>
+
           
           <form action="/FavSkins" method="POST">
           <input type="hidden" name="name" value="${skinCard.querySelector('img').dataset.name}">
@@ -94,6 +104,9 @@ container.addEventListener('click', event => {
           <input type="hidden" name="imageProfile" value="${skinCard.querySelector('img').src}">
           <input type="hidden" name="image" value="${skinCard.querySelector('img').dataset.src}">
           <button type="submit" value="FavSkins" id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"  style="color: white";></i></button>
+          
+          
+          
           <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true" style="color: white";></i></span>
           </form>
 
