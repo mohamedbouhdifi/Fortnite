@@ -24,7 +24,7 @@ childBlackListSkinSchema = new Schema({
 childFortniteSchema = new Schema({	
 	Favskins: [childFavSkinSchema],
 	BlacklistSkins: [childBlackListSkinSchema],
-	ProfilePic: String,
+	
 }),
 
 userSchema = new Schema( {
@@ -33,6 +33,7 @@ userSchema = new Schema( {
 	email: String,
 	password: String,
 	passwordConf: String,
+	ProfilePic: String,
 	Fortnite: childFortniteSchema,
 }),
 

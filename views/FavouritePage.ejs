@@ -64,6 +64,9 @@
         popup.classList.add('popup');
         popup.innerHTML = `
         <div class="popup-content">
+        <form action="/UpdateProfile/${skinCard.querySelector('img').dataset.name}" method="post">      
+        <button type= "submit"class="image-icon"><i class="fa-solid fa-image"></i></button>
+        </form>
 
         <span class="btn-close"><i class="fa fa-close"></i></span>
           
@@ -118,6 +121,7 @@
         });
       }
     });
+
   </script>
 
   </html>

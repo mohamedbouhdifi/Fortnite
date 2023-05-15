@@ -106,11 +106,22 @@
 .comments {
   float: left;
 }
-
+#comment{
+  width: 400px;
+}
 textarea {
   width: 300%;
   height: 100%;
   resize: vertical;
+}
+
+.image-icon {
+  background-color: transparent;
+  font-size: 48px;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  float: left;
 }
 
 .btn-close {
@@ -188,5 +199,8 @@ textarea {
   textarea {
     width: 100%;
 
+  }
+  #comment{
+    width: 250px;
   }
 }

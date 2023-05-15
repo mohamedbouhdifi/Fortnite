@@ -90,13 +90,6 @@ container.addEventListener('click', event => {
           <h1  style="color: white";>${skinCard.querySelector('img').dataset.name}</h1>
           <h3  style="color: white";>${skinCard.querySelector('img').alt}</h3>     
           
-          <form action="/Profile" method="POST">
-          <input type="hidden" name="name" value="${skinCard.querySelector('img').dataset.name}">
-          <input type="hidden" name="description" value="${skinCard.querySelector('img').alt}">
-          <input type="hidden" name="imageProfile" value="${skinCard.querySelector('img').src}">
-          <input type="hidden" name="image" value="${skinCard.querySelector('img').dataset.src}">
-          <button type="submit" onclick="changeProfilePic()" value="Profile" id="btnAvatar" class="Avatarbtn"><i class="fa fa-picture-o" aria-hidden="true"  style="color: white";></i></button>
-
           
           <form action="/FavSkins" method="POST">
           <input type="hidden" name="name" value="${skinCard.querySelector('img').dataset.name}">
