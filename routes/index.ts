@@ -75,23 +75,23 @@ router.get('/Login', function (req: any, res: any, next: any) {
 });
 
 router.post('/Login', function (req: any, res: any, next: any) {
-    User.findOne({ email: req.body.email }, function (err: any, data: any) {
-        if (data) {
-            hashUtils.comparePassword(req.body.password, data.password, function (err: any, isMatch: any) {
-                if (err) {
-                    return res.send({ "Success": "Error occurred while comparing passwords" });
-                }
-                if (isMatch) {
-                    req.session.userId = data.unique_id;
-                    return res.send({ "Success": "Success!" });
-                } else {
-                    return res.send({ "Success": "Wrong password!" });
-                }
-            });
-        } else {
-            return res.send({ "Success": "This Email Is not registered!" });
-        }
-    });
+	User.findOne({ email: req.body.email }, function (err: any, data: any) {
+		if (data) {
+			hashUtils.comparePassword(req.body.password, data.password, function (err: any, isMatch: any) {
+				if (err) {
+					return res.send({ "Success": "Error occurred while comparing passwords" });
+				}
+				if (isMatch) {
+					req.session.userId = data.unique_id;
+					return res.send({ "Success": "Success!" });
+				} else {
+					return res.send({ "Success": "Wrong password!" });
+				}
+			});
+		} else {
+			return res.send({ "Success": "This Email Is not registered!" });
+		}
+	});
 });
 
 
@@ -167,6 +167,11 @@ router.post("/FavSkins", (req: any, res: any) => {
 					description: req.body.description,
 					imageProfile: req.body.imageProfile,
 					image: req.body.image,
+					pickaxe: "",
+					emote: "",
+					notes: "Type your notes here",
+					wins: 0,
+					losses: 0,
 				};
 				data.Fortnite.Favskins.push(newFavouriteSkin);
 				console.log('Skin has been Favourited');
@@ -185,6 +190,89 @@ router.post("/FavSkins", (req: any, res: any) => {
 	});
 })
 
+router.post("/UpdateW-L/:skinTitle", (req: any, res: any) => {
+	console.log("UpdateW-L");
+	console.log(req.body);
+	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
+	  if (!data) {
+		res.redirect('/Login');
+	  } else {
+		res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+		res.setHeader('Pragma', 'no-cache');
+		res.setHeader('Expires', '0');
+  
+		const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.params.skinTitle);
+		if (existingSkin) {
+		  console.log('Skin is already Favourited');
+		  existingSkin.wins = req.body.wins;
+		  existingSkin.losses = req.body.losses;
+  
+		  if (existingSkin.losses >= 3) {
+			// Remove the skin from the array if losses are 3 or more
+			data.Fortnite.Favskins = data.Fortnite.Favskins.filter((skin: any) => skin.skinTitle !== req.params.skinTitle);
+  
+			// Add the skin to the blacklist
+			const blacklistedSkin = {
+			  skinTitle: existingSkin.skinTitle,
+			  description: existingSkin.description,
+			  imageProfile: existingSkin.imageProfile,
+			  image: existingSkin.image,
+			  reason: "Excessive losses"
+			};
+			data.Fortnite.BlacklistSkins.push(blacklistedSkin);
+		  }
+		} else {
+		  console.log('Skin is not Favourited');
+		}
+  
+		data.save((err: any) => {
+		  if (err) {
+			console.log(err);
+			// handle error
+		  } else {
+			console.log('User data updated successfully');
+			// render response
+			return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins });
+		  }
+		});
+	  }
+	});
+  });
+  
+  
+
+//update notes for favourite skin
+router.post("/UpdateNotes/:Title", (req: any, res: any) => {
+	console.log("UpdateNotes");
+	console.log(req.body);
+	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
+		if (!data) {
+			res.redirect('/Login');
+		} else {
+			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+			res.setHeader('Pragma', 'no-cache');
+			res.setHeader('Expires', '0');
+
+			const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.params.Title);
+			if (existingSkin) {
+				console.log('Skin is already Favourited');
+				existingSkin.notes = req.body.notes;
+			} else {
+				console.log('Skin is not Favourited');
+			}
+			data.save((err: any) => {
+				if (err) {
+					console.log(err);
+					// handle error
+				} else {
+					console.log('User data updated successfully');
+					// render response
+					return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins });
+				}
+			});
+		}
+	});
+})
 
 router.get("/BlacklistPage", (req: any, res: any) => {
 	console.log("BlacklistPage");
@@ -237,12 +325,85 @@ router.post("/BlacklistSkin", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins});
+					return res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins });
 				}
 			});
 		}
 	});
 });
+
+//update reason for blacklisted skin
+router.post("/Update/:Title", (req: any, res: any) => {
+	console.log("UpdateReason");
+	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
+		console.log("data");
+		console.log(data);
+		if (!data) {
+			res.redirect('/Login');
+		} else {
+			//console.log("found");
+			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+			res.setHeader('Pragma', 'no-cache');
+			res.setHeader('Expires', '0');
+
+			const existingSkin = data.Fortnite.BlacklistSkins.find((skin: any) => skin.skinTitle === req.params.Title);
+			if (existingSkin) {
+				existingSkin.reason = req.body.reason;
+			} else {
+				console.log('Skin is not blacklisted');
+			}
+			data.save((err: any) => {
+				if (err) {
+					console.log(err);
+					// handle error
+				} else {
+					console.log('User data updated successfully');
+					// render response
+					return res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins });
+				}
+			});
+		}
+	});
+
+})
+
+//delete blacklisted skin
+router.get("/Delete/:Title", (req: any, res: any) => {
+	console.log("DeleteBlacklistedSkin");
+	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
+		console.log("data");
+		console.log(data);
+		if (!data) {
+			res.redirect('/Login');
+		} else {
+			//console.log("found");
+			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+			res.setHeader('Pragma', 'no-cache');
+			res.setHeader('Expires', '0');
+
+			const existingSkin = data.Fortnite.BlacklistSkins.find((skin: any) => skin.skinTitle === req.params.Title);
+			if (existingSkin) {
+				data.Fortnite.BlacklistSkins = data.Fortnite.BlacklistSkins.filter((skin: any) => skin.skinTitle !== req.params.Title);
+			} else {
+				console.log('Skin is not blacklisted');
+			}
+			data.save((err: any) => {
+				if (err) {
+					console.log(err);
+					// handle error
+				} else {
+					console.log('User data updated successfully');
+					// render response
+
+					res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins });
+
+				}
+			});
+		}
+	});
+
+})
+
 router.get("/Profile", (req: any, res: any) => {
 	console.log("Profile");
 	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {

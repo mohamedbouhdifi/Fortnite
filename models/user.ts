@@ -10,7 +10,7 @@ var childFavSkinSchema = new Schema({
 	emote: String,
 	notes: String,
 	wins: Number,
-	loses: Number,
+	losses: Number,
 }),
 
 childBlackListSkinSchema = new Schema({
