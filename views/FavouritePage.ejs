@@ -65,21 +65,23 @@
         popup.innerHTML = `
         <div class="popup-content">
         <form action="/UpdateProfile/${skinCard.querySelector('img').dataset.name}" method="post">      
-        <button type= "submit"class="image-icon"><i class="fa-solid fa-image"></i></button>
+        <button style="color: white" type= "submit"class="image-icon"><i  class="fa-solid fa-image"></i></button>
         </form>
 
-        <span class="btn-close"><i class="fa fa-close"></i></span>
+        <span style="color: white" class="btn-close"><i class="fa fa-close"></i></span>
           
           <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
-          <h1>${skinCard.querySelector('img').dataset.name}</h1>
-          <h3>${skinCard.querySelector('img').alt}</h3><br>
+          <h1 style="color: white">${skinCard.querySelector('img').dataset.name}</h1>
+          <h3 style="color: white">${skinCard.querySelector('img').alt}</h3><br>
 
         <form action="/UpdateW-L/${skinCard.querySelector('img').dataset.name}" method="post">
-          <div style="font-size: 20px; font-weight: bold">
-          <label for="wins" >Wins:</label>
+          <div style="font-size: 20px; font-weight: bold; color: green">
+          <label style="color: white; for="wins" >Wins:</label>
           <input type="hidden" name="wins" id="wins" value="${skinCard.querySelector('img').dataset.wins}">
           <span>${skinCard.querySelector('img').dataset.wins}</span> <br>
-          <label for="losses">Losses:</label>
+          </div>
+          <div style="font-size: 20px; font-weight: bold; color: red">
+          <label style="color: white; for="losses">Losses:</label>
           <input type="hidden" name="losses" id="losses" value="${skinCard.querySelector('img').dataset.losses}">
           <span>${skinCard.querySelector('img').dataset.losses}</span>
           </div>
@@ -91,19 +93,19 @@
         </form>
 
           <br>
-          <div class= "pickaxe">
+          <div style="color: white" class= "pickaxe">
               <span id="pickaxetext">Pickaxe</span><br> 
               <a href="#" id="pickaxe"><img src="images/FavPageImg/pickaxe.png" alt="pickaxe" style="width: 200px;
               height: 200px;"></a> 
             </div>
             
-          <div class= "emote">
+          <div style="color: white" class= "emote">
               <span id= "emote">Emote</span><br>
               <a href="#"><img src="images/FavPageImg/emote.png" alt="emote" style="width: 200px;
               height: 200px;"></a>      
           </div>
           <br><br>         
-        <form id="updateForm" action="/UpdateNotes/${skinCard.querySelector('img').dataset.name}" method="POST" class= "comments">
+        <form style="color: white" id="updateForm" action="/UpdateNotes/${skinCard.querySelector('img').dataset.name}" method="POST" class= "comments">
           <div class="comment-box">
             <h3>Notes:</h3>
             <textarea name="notes" id="comment" readonly>${skinCard.querySelector('img').dataset.notes}</textarea><br>

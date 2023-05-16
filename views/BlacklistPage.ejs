@@ -67,14 +67,14 @@
               </form>
               <button onclick="hideConfirmationPopup()">No</button>
           </div>
-            <span class="btn-close"><i class="fa fa-close"></i></span>
+            <span style="color: white" class="btn-close"><i class="fa fa-close"></i></span>
             
             <img src="${skinCard.querySelector('img').dataset.src}"}">
-            <h1>${skinCard.querySelector('img').dataset.name}</h1>
-            <h3>${skinCard.querySelector('img').alt}</h3><br>
+            <h1 style="color: white">${skinCard.querySelector('img').dataset.name}</h1>
+            <h3 style="color: white">${skinCard.querySelector('img').alt}</h3><br>
             <div>
             <div class="comment-box">
-            <h3>Reason:</h3>
+            <h3 style="color: white" >Reason:</h3>
             <form id="updateForm" action="/Update/${skinCard.querySelector('img').dataset.name}" method="POST">
             <textarea id="comment" name="reason" style="font-weight:bold" readonly>${skinCard.querySelector('img').dataset.reason}</textarea><br>
             <button type="button" onclick="enableEditing()" class="buttonC">Edit</button>
