@@ -58,13 +58,14 @@ textarea{
 
 .popup-content {
   background-color: #2f3136;
+  overflow: hidden;
   padding: 20px;
   text-align: center;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   max-width: 90%;
   max-height: 90%;
-  overflow: scroll;
+  overflow: hidden;
   clear: both;
 }
 

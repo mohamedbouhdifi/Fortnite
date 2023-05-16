@@ -58,7 +58,7 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     max-width: 90%;
     max-height: 90%;
-    overflow: scroll;
+    overflow: hidden;
     clear: both;
 }
 
