@@ -24,6 +24,8 @@
     margin-bottom: 10px;
     width: 100%;
     max-width: 300px;
+    font-size: 18px;
+    font-weight: bold;
   }
   
   input[type="file"] {
@@ -44,7 +46,23 @@
   input[type="submit"]:hover {
     background-color: #FF6F7D;
   }
+  #email[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+  }
   
+  /* Add a visual indicator to show that the email field is read-only */
+  #email[readonly]::after {
+    content: "Read-only";
+    display: inline-block;
+    font-size: 18px;
+    padding: 2px 6px;
+    margin-left: 10px;
+    background-color: #ccc;
+    color: #333;
+    border-radius: 3px;
+  }
+
   /* Style the form layout */
   form {
     padding-top: 20px;
@@ -120,3 +138,13 @@
     border-radius: 50%;
   }
   
+  .success-message {
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  #message-container {
+    margin-bottom: 10px;
+  }

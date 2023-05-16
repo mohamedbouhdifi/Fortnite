@@ -1,24 +1,49 @@
 
 <%- include ("parts/header") %>
-  
-  <form class="formbox">
-    <h1>Profile Settings</h1>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username"><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email"><br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password"><br>
-    <label for="confirm-password">Confirm Password:</label>
-    <input type="password" id="confirm-password" name="confirm-password"><br>
-    <label for="avatar">Avatar:</label>
-    <img src="<%= Profile %>" id="profile-picture" style="width: 50%;"><br>
-    <input type="submit" value="Save Changes">
-  </form>
+<div id="message-container">
+  <% if (message) { %>
+    <p class="success-message"><%= message %></p>
+  <% } %>
+</div>
+<form class="formbox" action="/profile/update" method="POST" onsubmit="return validateForm();">
+  <h1>Profile Settings</h1>
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" value="<%= name %>" required><br>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" value="<%= email %>" readonly><br>
+  <label for="current-password">Current Password:</label>
+  <input type="password" id="current-password" name="current-password" required><br>
+  <label for="new-password">New Password:</label>
+  <input type="password" id="new-password" name="new-password"><br>
+  <label for="confirm-password">Confirm New Password:</label>
+  <input type="password" id="confirm-password" name="confirm-password"><br>
+  <label for="avatar">Avatar:</label>
+  <img src="<%= Profile %>" id="profile-picture" style="width: 50%;"><br>
+  <input type="submit" value="Save Changes" style="background-color: green; margin-top: 20px;">
+</form>
+
 
 
 </body>
 <head>
   <link rel="stylesheet" href="/css/EditProfile.css">
 </head>
+<script>
+  // Hide the success message after a specified duration
+  setTimeout(function() {
+    var messageContainer = document.getElementById('message-container');
+    if (messageContainer) {
+      messageContainer.style.display = 'none';
+    }
+  }, 3000);
+
+  function validateForm() {
+    var usernameInput = document.getElementById('username');
+    if (usernameInput.value.trim() === '') {
+      alert('Username cannot be empty.');
+      return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+  }
+</script>
 </html>
