@@ -1,3 +1,5 @@
+import { count } from "console";
+
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
@@ -205,8 +207,15 @@ router.post("/UpdateW-L/:skinTitle", (req: any, res: any) => {
 				console.log('Skin is already Favourited');
 				existingSkin.wins = req.body.wins;
 				existingSkin.losses = req.body.losses;
+				var count = 0;
+				if(existingSkin.wins != 0){
+					count = 0;
+				}
+				else{
+					count = 1;
+				}
 
-				if (existingSkin.losses >= 3) {
+				if (existingSkin.losses >= 3 * (existingSkin.wins+count)) {
 					// Remove the skin from the array if losses are 3 or more
 					data.Fortnite.Favskins = data.Fortnite.Favskins.filter((skin: any) => skin.skinTitle !== req.params.skinTitle);
 

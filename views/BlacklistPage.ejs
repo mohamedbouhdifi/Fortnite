@@ -60,12 +60,12 @@
           
           <span class="delete-icon" onclick="showConfirmationPopup()"><i class="fa fa-trash-o" style="color:red"></i></span>
           
-          <div class="popupDelete" id="confirmation-popup">
+          <div class="popupDelete" id="confirmation-popup" style="background-color: #2f3136; color: white; overflow: hidden;">
               <h2>Are you sure you want to delete?</h2>
               <form action="/Delete/${skinCard.querySelector('img').dataset.name}" method="get">
               <button name= "Delete "onclick="deleteItem()">Yes</button>
               </form>
-              <button onclick="hideConfirmationPopup()">No</button>
+              <button onclick="hideConfirmationPopup()" style="background-color: red;">No</button>
           </div>
             <span style="color: white" class="btn-close"><i class="fa fa-close"></i></span>
             

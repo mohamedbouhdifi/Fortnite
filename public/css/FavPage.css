@@ -34,13 +34,13 @@
   color: whitesmoke;
   border: 5px outset gray;
 }
-
+/* 
 @media only screen and (min-width: 768px) {
   .skin-container {
     padding: 100px;
     padding-top: 120px;
   }
-}
+} */
 
 .popup {
   position: fixed;

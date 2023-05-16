@@ -151,5 +151,8 @@ textarea {
   .btn-close {
     font-size: 36px;
   } 
+  .popup-content {
+    overflow: scroll;
+  }
 }
 

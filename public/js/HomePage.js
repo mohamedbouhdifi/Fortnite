@@ -68,7 +68,7 @@ container.addEventListener('click', event => {
           
           
       
-          <div class="popupReason" id="confirmation-popup">
+          <div class="popupReason" id="confirmation-popup" style="overflow: hidden; background-color: #2f3136; color: white;">
           <form action="/BlacklistSkin" method="POST">
           <input type="hidden" name="name" value="${skinCard.querySelector('img').dataset.name}">
           <input type="hidden" name="description" value="${skinCard.querySelector('img').alt}">

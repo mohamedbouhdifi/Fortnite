@@ -141,7 +141,6 @@ header {
   color: white;
   text-decoration: none;
   font-weight: 500;
-
 }
 
 .link-left {
@@ -186,7 +185,7 @@ header {
 }
 
 .sub-menu {
-  background: #fff;
+  background-color: gray;
   padding: 20px;
   margin: 10px;
 }
@@ -198,13 +197,13 @@ header {
 .user-info {
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: grey;
   
 }
 
 .user-info h3 {
   font-weight: 500;
-  background-color: white;
+  background-color: grey;
 }
 
 .user-info img {
@@ -217,7 +216,7 @@ header {
   border: 0;
   height: 1px;
   width: 100%;
-  background: #ccc;
+  background: black;
   margin: 15px 0 10px;
 }
 
@@ -228,17 +227,17 @@ header {
   text-decoration: none;
   color: #525252;
   margin: 12px 0;
-  background-color: white;
+  background-color: grey;
 
 }
 
 .sub-menu-link p {
   width: 100%;
-  background-color: white;
+  background-color: grey;
 }
 .sub-menu-link span {
 
-  background-color: white;
+  background-color: grey;
 }
 
 .sub-menu-link i {
