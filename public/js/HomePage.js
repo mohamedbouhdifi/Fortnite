@@ -96,11 +96,11 @@ container.addEventListener('click', event => {
           <input type="hidden" name="description" value="${skinCard.querySelector('img').alt}">
           <input type="hidden" name="imageProfile" value="${skinCard.querySelector('img').src}">
           <input type="hidden" name="image" value="${skinCard.querySelector('img').dataset.src}">
-          <button type="submit" value="FavSkins" id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"  style="color: white";></i></button>
+          <button type="submit" value="FavSkins" id="btnstr" class="starbtn"><i class="fa fa-star" aria-hidden="true"  style="color: yellow";></i></button>
           
           
           
-          <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true" style="color: white";></i></span>
+          <span class="banbtn" onclick="showConfirmationPopup()"><i class="fa fa-ban" aria-hidden="true" style="color: red";></i></span>
           </form>
 
         </div>
