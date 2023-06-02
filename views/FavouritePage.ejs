@@ -8,122 +8,24 @@
         <div class="skin-container">
           <% for (let i=0; i < FavSkins.length; i++) { let skin=FavSkins[i]; %>
             <div class="skin-card">
-              <img src="<%= skin.imageProfile %>" alt="<%= skin.description %>" data-src="<%= skin.image %>"
+              <a href="SkinDetails/<%= skin.skinTitle %>"><img src="<%= skin.imageProfile %>" alt="<%= skin.description %>" data-src="<%= skin.image %>"
                 data-name="<%= skin.skinTitle %> " data-pickaxe="" data-emote="" data-notes=" <%= skin.notes %> "
                 data-wins=" <%= skin.wins %>" data-losses=" <%= skin.losses %>"
-                style="background-image: linear-gradient( 90.5deg,  rgba(255,207,139,0.50) 1.1%, rgba(255,207,139,1) 81.3% );">
+                style="background-image: linear-gradient( 90.5deg,  rgba(255,207,139,0.50) 1.1%, rgba(255,207,139,1) 81.3% );"></a>
               <h3>
                 <%= skin.skinTitle %>
               </h3>
             </div>
-
             <% } %>
-
         </div>
-
         <% } %>
-
-
   </main>
-
   </body>
-
   <head>
     <link rel="stylesheet" href="/css/FavPage.css">
   </head>
-  <script>
-
-    const container = document.querySelector('.skin-container');
-
-    function enableEditing() {
-      const textarea = document.getElementById('comment');
-      textarea.removeAttribute('readonly');
-    }
-
-    function addOneWin() {
-      var winsElement = document.getElementById('wins');
-      var wins = parseInt(winsElement.value);
-      wins++;
-      winsElement.value = wins;
-      winsElement.nextElementSibling.innerHTML = wins; // Update the span element
-    }
-
-    function addOneLose() {
-      var lossesElement = document.getElementById('losses');
-      var losses = parseInt(lossesElement.value);
-      losses++;
-      lossesElement.value = losses;
-      lossesElement.nextElementSibling.innerHTML = losses; // Update the span element
-    }
 
 
-    container.addEventListener('click', event => {
-      const skinCard = event.target.closest('.skin-card');
-      if (skinCard) {
-        const popup = document.createElement('div');
-        popup.classList.add('popup');
-        popup.innerHTML = `
-        <div class="popup-content" style=" background-color: #2f3136; color: white;">
-        <form action="/UpdateProfile/${skinCard.querySelector('img').dataset.name}" method="post">      
-        <button style="color: white" type= "submit"class="image-icon"><i  class="fa-solid fa-image"></i></button>
-        </form>
-
-        <span style="color: white" class="btn-close"><i class="fa fa-close"></i></span>
-          
-          <img src="${skinCard.querySelector('img').dataset.src}" alt="${skinCard.querySelector('img').alt}">
-          <h1 style="color: white">${skinCard.querySelector('img').dataset.name}</h1>
-          <h3 style="color: white">${skinCard.querySelector('img').alt}</h3><br>
-
-        <form action="/UpdateW-L/${skinCard.querySelector('img').dataset.name}" method="post">
-          <div style="font-size: 20px; font-weight: bold; color: green">
-          <label style="color: white; for="wins" >Wins:</label>
-          <input type="hidden" name="wins" id="wins" value="${skinCard.querySelector('img').dataset.wins}">
-          <span>${skinCard.querySelector('img').dataset.wins}</span> <br>
-          </div>
-          <div style="font-size: 20px; font-weight: bold; color: red">
-          <label style="color: white; for="losses">Losses:</label>
-          <input type="hidden" name="losses" id="losses" value="${skinCard.querySelector('img').dataset.losses}">
-          <span>${skinCard.querySelector('img').dataset.losses}</span>
-          </div>
-          <div>
-            <button onclick="addOneWin()" type="button" class="buttonC" id="win-button">Win</button> 
-            <button onclick="addOneLose()" type="button" class="buttonC" id="lose-button">Lose</button>
-            <button type="submit" class="buttonC">Save</button>
-          </div>
-        </form>
-
-          <br>
-          <div style="color: white" class= "pickaxe">
-              <span id="pickaxetext">Pickaxe</span><br> 
-              <a href="#" id="pickaxe"><img src="images/FavPageImg/pickaxe.png" alt="pickaxe" style="width: 200px;
-              height: 200px;"></a> 
-            </div>
-            
-          <div style="color: white" class= "emote">
-              <span id= "emote">Emote</span><br>
-              <a href="#"><img src="images/FavPageImg/emote.png" alt="emote" style="width: 200px;
-              height: 200px;"></a>      
-          </div>
-          <br><br>         
-        <form style="color: white" id="updateForm" action="/UpdateNotes/${skinCard.querySelector('img').dataset.name}" method="POST" class= "comments">
-          <div class="comment-box">
-            <h3>Notes:</h3>
-            <textarea name="notes" id="comment" readonly>${skinCard.querySelector('img').dataset.notes}</textarea><br>
-            <button type="button" onclick="enableEditing()" class="buttonC">Edit</button>
-            <button type="submit" class="buttonC">Save</button>
-          </div> 
-        </form> 
-        </div>
-      `;
-        document.body.appendChild(popup);
-
-        const closeBtn = popup.querySelector('.btn-close');
-        closeBtn.addEventListener('click', () => {
-          popup.remove();
-        });
-      }
-    });
-
-  </script>
+    
 
   </html>

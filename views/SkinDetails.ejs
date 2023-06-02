@@ -1,0 +1,300 @@
+<%- include ("parts/header") %>
+
+  <main>
+    <br>
+    <div class="flex-container">
+      <img id= "mainImg" src="<%= skin.image %>" alt="<%= skin.description %>">
+
+      <div class="content">
+        <form action="/UpdateProfile/<%= skin.skinTitle %>" method="post">
+          <button style="color: white" type="submit" class="image-icon"><i class="fa-solid fa-image"></i></button>
+        </form>
+
+        <h1 style="color: white">
+          <%= skin.skinTitle %>
+        </h1>
+
+        <h3 style="color: white">
+          <%= skin.description %>
+        </h3>
+        <br>
+        <form action="/UpdateW-L/<%= skin.skinTitle %>" method="post">
+          <div style="font-size: 20px; font-weight: bold; color: green">
+            <label style="color: white;">Wins:</label>
+            <input type="hidden" name="wins" id="wins" value="<%= skin.wins %>">
+            <span>
+              <%= skin.wins %>
+            </span> <br>
+          </div>
+
+          <div style="font-size: 20px; font-weight: bold; color: red">
+            <label style="color: white; ">Losses:</label>
+            <input type="hidden" name="losses" id="losses" value="<%= skin.losses %>">
+            <span>
+              <%= skin.losses %>
+            </span>
+          </div>
+
+          <div>
+            <button onclick="addOneWin()" type="button" class="buttonC" id="win-button">Win</button>
+            <button onclick="addOneLose()" type="button" class="buttonC" id="lose-button">Lose</button>
+            <button type="submit" class="buttonC">Save</button>
+          </div>
+        </form>
+
+        <br>
+
+
+        <form style="color: white" id="updateForm" action="/UpdateNotes/<%= skin.skinTitle %>" method="POST"
+          class="comments">
+          <div class="comment-box">
+            <h3>Notes:</h3>
+            <textarea name="notes" id="comment" readonly><%= skin.notes %></textarea><br>
+            <button type="button" onclick="enableEditing()" class="buttonC">Edit</button>
+            <button type="submit" class="buttonC">Save</button>
+          </div>
+        </form>
+        <div style="text-align: center;">
+          <h2 style="color: white; padding-top: 20px;">Pickaxe & Emote</h2>
+          <div class="images-container">
+            <figure>
+              <img id="pickaxeImage" src="<%= skin.pickaxeImg %>" alt="Fortnite Pickaxes" width="200" height="200">
+              <figcaption>
+                <%= skin.pickaxeName %>
+              </figcaption>
+            </figure>
+            <figure>
+              <img id="emoteImage" src="<%= skin.emoteImg %>" alt="Fortnite Emotes" width="200" height="200">
+              <figcaption>
+                <%= skin.emoteName %>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        
+        <div id="pickaxePopup" class="popup">
+          <div class="popup-header">
+            <span class="pickaxe-close btn-close"><i class="fa fa-close"></i></span>
+            <h3 style="font-size: 24px; text-align: center;">Select a Pickaxe</h3>
+          </div>
+          <div id="pickaxeList"></div>
+        </div>
+        <div id="emotePopup" class="popup">
+          <div class="popup-header">
+            <span class="emote-close btn-close"><i class="fa fa-close"></i></span>
+            <h3 style="font-size: 24px; text-align: center;">Select an Emote</h3>
+          </div>
+          <div id="emoteList"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <script>
+
+    function enableEditing() {
+      const textarea = document.getElementById('comment');
+      textarea.removeAttribute('readonly');
+    }
+
+    function addOneWin() {
+      var winsElement = document.getElementById('wins');
+      var wins = parseInt(winsElement.value);
+      wins++;
+      winsElement.value = wins;
+      winsElement.nextElementSibling.innerHTML = wins; // Update the span element
+    }
+
+    function addOneLose() {
+      var lossesElement = document.getElementById('losses');
+      var losses = parseInt(lossesElement.value);
+      losses++;
+      lossesElement.value = losses;
+      lossesElement.nextElementSibling.innerHTML = losses; // Update the span element
+    }
+
+    // Function to display the pickaxe popup
+    function showPopup() {
+      document.getElementById('pickaxePopup').style.display = 'block';
+    }
+
+    function showEmotePopup() {
+      document.getElementById('emotePopup').style.display = 'block';
+    }
+
+    // Function to hide the pickaxe popup
+    function hidePopupPickaxe() {
+      document.getElementById('pickaxePopup').style.display = 'none';
+    }
+    function hidePopupEmote() {
+      document.getElementById('emotePopup').style.display = 'none';
+    }
+
+    // Function to select a pickaxe
+    function selectPickaxe(pickaxe) {
+      fetch('/UpdatePickaxe/<%= skin.skinTitle %>', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pickaxeName: pickaxe.name, pickaxeImg: pickaxe.images.icon }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Pickaxe added to the database:', data);
+          // Reload the page
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+
+    function selectEmote(emote) {
+
+      fetch('/UpdateEmote/<%= skin.skinTitle %>', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ emoteName: emote.name, emoteImg: emote.images.icon }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Emote added to the database:', data);
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+
+    }
+    function fetchPickaxes() {
+      var apiUrl = 'https://fortnite-api.com/v2/cosmetics/br';
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          var pickaxeList = document.getElementById('pickaxeList');
+          if (data && data.data && data.data.length > 0) {
+            var pickaxes = data.data.filter(function (item) {
+              return item.type.value === 'pickaxe' && item.name !== 'Test Pickaxe';
+            }).slice(0, 40); // Limit the pickaxes to the first 40 items
+            pickaxeList.innerHTML = ''; // Clear the existing pickaxe list
+            var row;
+            pickaxes.forEach(function (pickaxe, index) {
+              if (index % 4 === 0) {
+                row = document.createElement('div');
+                row.classList.add('row');
+                pickaxeList.appendChild(row);
+              }
+              var pickaxeElement = document.createElement('div');
+              pickaxeElement.classList.add('pickaxe');
+              var pickaxeImage = document.createElement('img');
+              pickaxeImage.src = pickaxe.images.icon;
+              pickaxeImage.alt = pickaxe.name;
+              pickaxeImage.classList.add('pickaxe-image');
+              pickaxeElement.appendChild(pickaxeImage);
+              var pickaxeName = document.createElement('div');
+              pickaxeName.innerHTML = pickaxe.name;
+              pickaxeName.classList.add('pickaxe-name');
+              pickaxeElement.appendChild(pickaxeName);
+              pickaxeElement.onclick = function (event) {
+                event.stopPropagation();
+                selectPickaxe(pickaxe);
+              };
+              row.appendChild(pickaxeElement);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+
+
+    // Function to fetch emotes from the API
+    function fetchEmotes() {
+      var apiUrl = 'https://fortnite-api.com/v2/cosmetics/br';
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          var emoteList = document.getElementById('emoteList');
+          if (data && data.data && data.data.length > 0) {
+            var emotes = data.data.filter(function (item) {
+              return item.type.value === 'emote';
+            }).slice(0, 40);
+            var row;
+            emotes.forEach(function (emote, index) {
+              if (index % 4 === 0) {
+                row = document.createElement('div');
+                row.classList.add('row');
+                emoteList.appendChild(row);
+              }
+              var emoteElement = document.createElement('div');
+              emoteElement.classList.add('emote');
+              var emoteImage = document.createElement('img');
+              emoteImage.src = emote.images.icon;
+              emoteImage.alt = emote.name;
+              emoteImage.classList.add('emote-image');
+              emoteElement.appendChild(emoteImage);
+              var emoteName = document.createElement('div');
+              emoteName.innerHTML = emote.name;
+              emoteName.classList.add('emote-name');
+              emoteElement.appendChild(emoteName);
+              emoteElement.onclick = function () {
+                selectEmote(emote);
+              };
+              row.appendChild(emoteElement);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    // Add event listener to the image
+    document.getElementById('pickaxeImage').addEventListener('click', function (event) {
+      event.stopPropagation(); // Stop click event from propagating
+      fetchPickaxes();
+      showPopup();
+    });
+
+    document.getElementById('emoteImage').addEventListener('click', function (event) {
+      event.stopPropagation();
+      fetchEmotes();
+      showEmotePopup();
+    });
+
+    // Add event listener to the document for clicks outside the popup
+    document.addEventListener('click', function (event) {
+      var pickaxePopup = document.getElementById('pickaxePopup');
+      if (event.target !== pickaxePopup && !pickaxePopup.contains(event.target)) {
+        hidePopupPickaxe();
+      }
+
+      var emotePopup = document.getElementById('emotePopup');
+      if (event.target !== emotePopup && !emotePopup.contains(event.target)) {
+        hidePopupEmote();
+      }
+    });
+
+    // Add event listener to the close buttons
+    document.querySelector('.pickaxe-close').addEventListener('click', function () {
+      hidePopupPickaxe();
+    });
+    document.querySelector('.emote-close').addEventListener('click', function () {
+      hidePopupEmote();
+    });
+  </script>
+
+  <head>
+    <link rel="stylesheet" href="/css/FavPage.css">
+
+  </head>
+
+  </html>

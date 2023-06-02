@@ -152,6 +152,61 @@ router.post("/FavSkins", (req: any, res: any) => {
 	console.log("FavouriteSkin");
 	console.log(req.body);
 	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
+	  if (!data) {
+		res.redirect('/Login');
+	  } else {
+		res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+		res.setHeader('Pragma', 'no-cache');
+		res.setHeader('Expires', '0');
+  
+		const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.body.name);
+		if (existingSkin) {
+		  console.log('Skin is already Favorited');
+		} else {
+		  const existingBlacklistSkin = data.Fortnite.BlacklistSkins.find((skin: any) => skin.skinTitle === req.body.name);
+		  if (existingBlacklistSkin) {
+			console.log('Skin is blacklisted. Cannot add to favorites.');
+			return res.redirect('/Avatars');
+		  }
+  
+		  const newFavouriteSkin = {
+			skinTitle: req.body.name,
+			description: req.body.description,
+			imageProfile: req.body.imageProfile,
+			image: req.body.image,
+			pickaxeImg: "/images/FavPageImg/pickaxe.png",
+			pickaxeName: "No pickaxe selected",
+			emoteImg: "/images/FavPageImg/emote.png",
+			emoteName: "No emote selected",
+			notes: "Type your notes here",
+			wins: 0,
+			losses: 0,
+		  };
+  
+		  data.Fortnite.Favskins.push(newFavouriteSkin);
+		  console.log('Skin has been Favorited');
+		}
+  
+		data.save((err: any) => {
+		  if (err) {
+			console.log(err);
+			// handle error
+		  } else {
+			console.log('User data updated successfully');
+			// render response
+			return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
+		  }
+		});
+	  }
+	});
+  });
+  
+
+//Make a route to show the skin details page 
+router.get("/SkinDetails/:skinTitle", (req: any, res: any) => {
+	console.log("SkinDetails");
+	console.log(req.params.skinTitle);
+	User.findOne({ unique_id: req.session.userId }, function (err: any, data: any) {
 		if (!data) {
 			res.redirect('/Login');
 		} else {
@@ -159,34 +214,13 @@ router.post("/FavSkins", (req: any, res: any) => {
 			res.setHeader('Pragma', 'no-cache');
 			res.setHeader('Expires', '0');
 
-			const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.body.name);
+			const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.params.skinTitle);
 			if (existingSkin) {
 				console.log('Skin is already Favourited');
+				return res.render('SkinDetails', { "name": data.username, "email": data.email, "skin": existingSkin, "Profile": data.ProfilePic });
 			} else {
-				const newFavouriteSkin = {
-					skinTitle: req.body.name,
-					description: req.body.description,
-					imageProfile: req.body.imageProfile,
-					image: req.body.image,
-					pickaxe: "",
-					emote: "",
-					notes: "Type your notes here",
-					wins: 0,
-					losses: 0,
-				};
-				data.Fortnite.Favskins.push(newFavouriteSkin);
-				console.log('Skin has been Favourited');
+				console.log('Skin has not been Favourited');
 			}
-			data.save((err: any) => {
-				if (err) {
-					console.log(err);
-					// handle error
-				} else {
-					console.log('User data updated successfully');
-					// render response
-					return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
-				}
-			});
 		}
 	});
 })
@@ -208,14 +242,14 @@ router.post("/UpdateW-L/:skinTitle", (req: any, res: any) => {
 				existingSkin.wins = req.body.wins;
 				existingSkin.losses = req.body.losses;
 				var count = 0;
-				if(existingSkin.wins != 0){
+				if (existingSkin.wins != 0) {
 					count = 0;
 				}
-				else{
+				else {
 					count = 1;
 				}
 
-				if (existingSkin.losses >= 3 * (existingSkin.wins+count)) {
+				if (existingSkin.losses >= 3 * (existingSkin.wins + count)) {
 					// Remove the skin from the array if losses are 3 or more
 					data.Fortnite.Favskins = data.Fortnite.Favskins.filter((skin: any) => skin.skinTitle !== req.params.skinTitle);
 
@@ -228,6 +262,20 @@ router.post("/UpdateW-L/:skinTitle", (req: any, res: any) => {
 						reason: "Excessive losses"
 					};
 					data.Fortnite.BlacklistSkins.push(blacklistedSkin);
+					if (data.ProfilePic == existingSkin.imageProfile) {
+						data.ProfilePic = "https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg";
+					}
+
+					data.save((err: any) => {
+						if (err) {
+							console.log(err);
+							// handle error
+						} else {
+							console.log('User data updated successfully');
+							// render response
+							return res.redirect('/FavouritePage');
+						}
+					});
 				}
 			} else {
 				console.log('Skin is not Favourited');
@@ -240,7 +288,7 @@ router.post("/UpdateW-L/:skinTitle", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
+					return res.render('SkinDetails', { "name": data.username, "email": data.email, "skin": existingSkin, "Profile": data.ProfilePic });
 				}
 			});
 		}
@@ -274,12 +322,87 @@ router.post("/UpdateNotes/:Title", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
+					return res.render('SkinDetails', { "name": data.username, "email": data.email, "skin": existingSkin, "Profile": data.ProfilePic });
 				}
 			});
 		}
 	});
 })
+
+//create route for update pickaxe in database and render to pickaxe page
+router.post("/UpdatePickaxe/:Title", (req: any, res: any) => {
+	console.log("UpdatePickaxe");
+	console.log(req.body);
+	
+	User.findOne({ unique_id: req.session.userId }, (err: any, data: any) => {
+	  if (!data) {
+		res.redirect('/Login');
+	  } else {
+		res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+		res.setHeader('Pragma', 'no-cache');
+		res.setHeader('Expires', '0');
+  
+		const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.params.Title);
+		if (existingSkin) {
+		  console.log('Skin is already Favourited');
+		  existingSkin.pickaxeName = req.body.pickaxeName;
+		  existingSkin.pickaxeImg = req.body.pickaxeImg;
+		} else {
+		  console.log('Skin is not Favourited');
+		}
+		
+		data.save((err: any) => {
+		  if (err) {
+			console.log(err);
+			// handle error
+			res.status(500).json({ error: 'An error occurred' });
+		  } else {
+			console.log('User BOMBA');
+			// Return a JSON response indicating success
+			res.json({ status: 'success' });
+		  }
+		});
+	  }
+	});
+  });
+  
+
+//create route for update emote in database and render to emote page
+router.post("/UpdateEmote/:Title", (req: any, res: any) => {
+	console.log("UpdateEmote");
+	console.log(req.body);
+	
+	User.findOne({ unique_id: req.session.userId }, (err: any, data: any) => {
+	  if (!data) {
+		res.redirect('/Login');
+	  } else {
+		res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+		res.setHeader('Pragma', 'no-cache');
+		res.setHeader('Expires', '0');
+  
+		const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.params.Title);
+		if (existingSkin) {
+		  console.log('Skin is already Favourited');
+		  existingSkin.emoteName = req.body.emoteName;
+		  existingSkin.emoteImg = req.body.emoteImg;
+		} else {
+		  console.log('Skin is not Favourited');
+		}
+		
+		data.save((err: any) => {
+		  if (err) {
+			console.log(err);
+			// handle error
+			res.status(500).json({ error: 'An error occurred' });
+		  } else {
+			console.log('Emote updated');
+			// Return a JSON response indicating success
+			res.json({ status: 'success' });
+		  }
+		});
+	  }
+	});
+  });
 
 router.get("/BlacklistPage", (req: any, res: any) => {
 	console.log("BlacklistPage");
@@ -424,7 +547,7 @@ router.get("/Profile", (req: any, res: any) => {
 			res.setHeader('Pragma', 'no-cache');
 			res.setHeader('Expires', '0');
 
-			return res.render('Profile', { "name": data.username, "email": data.email, "Profile": data.ProfilePic,message: '' });
+			return res.render('Profile', { "name": data.username, "email": data.email, "Profile": data.ProfilePic, message: '' });
 		}
 	});
 
@@ -511,7 +634,7 @@ router.post("/UpdateProfile/:Title", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
+					res.redirect('/FavouritePage');
 				}
 			});
 		}

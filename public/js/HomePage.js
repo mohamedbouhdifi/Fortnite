@@ -17,10 +17,10 @@ fetch(apiUrl)
   .then(data => {
     const skins = data.data.filter(item => item.type.value === 'outfit');
 
-    for (let index = 0; index < 83; index++) {
+    for (let index = 0; index < 119; index++) {
       const skin = skins[index];
 
-      if (skin.name != "null" && skin.images.featured != null) {
+      if (skin.name != "null" && skin.images.featured != null ) {
         if (skin.rarity.displayValue == "Legendary" || skin.rarity.displayValue == "Epic" || skin.rarity.displayValue == "Rare" || skin.rarity.displayValue == "Uncommon") {
           const card = document.createElement('div');
           card.classList.add('skin-card');
