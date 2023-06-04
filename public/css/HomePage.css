@@ -26,6 +26,11 @@
   height: auto;
   object-fit: cover;
   border: 5px outset gray;
+  transition: transform 0.3s ease;
+}
+
+.skin-card img:hover {
+  transform: scale(1.1);
 }
 
 .skin-card h3 {

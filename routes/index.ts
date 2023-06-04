@@ -111,7 +111,7 @@ router.get('/Avatars', function (req: any, res: any, next: any) {
 			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
 			res.setHeader('Pragma', 'no-cache');
 			res.setHeader('Expires', '0');
-			return res.render('Homepage', { "name": data.username, "email": data.email, "Profile": data.ProfilePic });
+			return res.render('Homepage', { "name": data.username, "Profile": data.ProfilePic });
 		}
 	});
 });
@@ -142,7 +142,7 @@ router.get("/FavouritePage", (req: any, res: any) => {
 			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
 			res.setHeader('Pragma', 'no-cache');
 			res.setHeader('Expires', '0');
-			return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
+			return res.render('FavouritePage', { "name": data.username, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
 		}
 	});
 })
@@ -194,7 +194,7 @@ router.post("/FavSkins", (req: any, res: any) => {
 		  } else {
 			console.log('User data updated successfully');
 			// render response
-			return res.render('FavouritePage', { "name": data.username, "email": data.email, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
+			return res.render('FavouritePage', { "name": data.username, "FavSkins": data.Fortnite.Favskins, "Profile": data.ProfilePic });
 		  }
 		});
 	  }
@@ -217,7 +217,7 @@ router.get("/SkinDetails/:skinTitle", (req: any, res: any) => {
 			const existingSkin = data.Fortnite.Favskins.find((skin: any) => skin.skinTitle === req.params.skinTitle);
 			if (existingSkin) {
 				console.log('Skin is already Favourited');
-				return res.render('SkinDetails', { "name": data.username, "email": data.email, "skin": existingSkin, "Profile": data.ProfilePic });
+				return res.render('SkinDetails', { "name": data.username, "skin": existingSkin, "Profile": data.ProfilePic });
 			} else {
 				console.log('Skin has not been Favourited');
 			}
@@ -288,7 +288,7 @@ router.post("/UpdateW-L/:skinTitle", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('SkinDetails', { "name": data.username, "email": data.email, "skin": existingSkin, "Profile": data.ProfilePic });
+					return res.render('SkinDetails', { "name": data.username, "skin": existingSkin, "Profile": data.ProfilePic });
 				}
 			});
 		}
@@ -322,7 +322,7 @@ router.post("/UpdateNotes/:Title", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('SkinDetails', { "name": data.username, "email": data.email, "skin": existingSkin, "Profile": data.ProfilePic });
+					return res.render('SkinDetails', { "name": data.username, "skin": existingSkin, "Profile": data.ProfilePic });
 				}
 			});
 		}
@@ -416,7 +416,7 @@ router.get("/BlacklistPage", (req: any, res: any) => {
 			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
 			res.setHeader('Pragma', 'no-cache');
 			res.setHeader('Expires', '0');
-			return res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
+			return res.render('BlacklistPage', { "name": data.username, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
 		}
 	});
 
@@ -455,7 +455,7 @@ router.post("/BlacklistSkin", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
+					return res.render('BlacklistPage', { "name": data.username, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
 				}
 			});
 		}
@@ -489,7 +489,7 @@ router.post("/Update/:Title", (req: any, res: any) => {
 				} else {
 					console.log('User data updated successfully');
 					// render response
-					return res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
+					return res.render('BlacklistPage', { "name": data.username, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
 				}
 			});
 		}
@@ -525,7 +525,7 @@ router.get("/Delete/:Title", (req: any, res: any) => {
 					console.log('User data updated successfully');
 					// render response
 
-					res.render('BlacklistPage', { "name": data.username, "email": data.email, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
+					res.render('BlacklistPage', { "name": data.username, "BlacklistSkins": data.Fortnite.BlacklistSkins, "Profile": data.ProfilePic });
 
 				}
 			});
@@ -601,7 +601,7 @@ router.post('/profile/update', function (req: any, res: any, next: any) {
 					return res.send({ "Success": "An error occurred while updating the profile." });
 				}
 				// Update the success message after saving the profile
-				return res.render('Profile', { name: user.username, email: user.email, Profile: user.ProfilePic, message: 'Profile updated successfully!' });
+				return res.render('Profile', { name: user.username, Profile: user.ProfilePic, message: 'Profile updated successfully!' });
 
 			});
 		});
@@ -657,7 +657,7 @@ router.get("/PrivacyPolicy", (req: any, res: any) => {
 			res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
 			res.setHeader('Pragma', 'no-cache');
 			res.setHeader('Expires', '0');
-			return res.render('PrivacyPolicy', { "name": data.username, "email": data.email, "Profile": data.ProfilePic });
+			return res.render('PrivacyPolicy', { "name": data.username, "Profile": data.ProfilePic });
 		}
 	});
 
